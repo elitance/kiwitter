@@ -1,0 +1,72 @@
+@import url('init.css');
+
+body {
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+}
+
+main {
+   display: flex;
+   height: 100%;
+   width: 60%;
+}
+
+main > div {
+   padding: 15px;
+   border-left: 1px solid gray;
+}
+
+.sidebar {
+   border-left: none;
+   flex-basis: 20%;
+   background: white;
+}
+
+.sidebar > a {
+   width: 55px;
+   height: 55px;
+   padding: 0;
+   border-radius: 27.5px;
+   transition: background 0.2s;
+}
+
+.sidebar > a:hover {
+   background: rgba(29, 161, 242, 0.2);
+}
+
+.sidebar img {
+   width: 60%;
+   filter: invert(57%) sepia(55%) saturate(3137%) hue-rotate(175deg) brightness(95%) contrast(99%);
+}
+
+.sidebar .menu {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   padding: 15px;
+   margin-top: 30px;
+   height: 70%;
+}
+
+.sidebar .menu a {
+   margin-bottom: 5px;
+   height: 50px;
+   border-radius: 25px;
+}
+
+.sidebar .menu a:last-child {
+   width: 85%;
+   margin-top: 30px;
+   align-self: center;
+}
+
+.home {
+   flex-basis: 80%;
+}
+
+.home h1 {
+   margin: 25px 15px 15px 15px;
+   padding: 0 0 5px 5px;
+   border-bottom: 4px solid rgba(29, 161, 242, .5);
+}
