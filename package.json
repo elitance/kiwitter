@@ -4,7 +4,7 @@
    "description": "Kiwitter: Clone of Twitter",
    "main": "dist/app.js",
    "repository": "https://github.com/elitance/kiwitter.git",
-   "author": "Lucas Han <ldhan0715@gmail.com>",
+   "author": "Lucas Han <elitance.go@gmail.com>",
    "license": "GPL-3.0",
    "scripts": {
       "start": "pm2 start dist/app.js --watch"
