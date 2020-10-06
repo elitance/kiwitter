@@ -7,8 +7,7 @@
    "author": "Lucas Han <ldhan0715@gmail.com>",
    "license": "GPL-3.0",
    "scripts": {
-      "start": "tsc-watch --onSuccess \"node dist/app.js\"",
-      "test": "pm2 start dist/app.js --watch"
+      "start": "pm2 start dist/app.js --watch"
    },
    "devDependencies": {},
    "peerDependencies": {
