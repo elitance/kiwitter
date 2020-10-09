@@ -61,11 +61,11 @@ main > div {
    align-self: center;
 }
 
-.home {
+.main {
    flex-basis: 80%;
 }
 
-.home h1 {
+.main h1 {
    margin: 25px 15px 15px 15px;
    padding: 0 0 5px 5px;
    border-bottom: 4px solid rgba(29, 161, 242, .5);

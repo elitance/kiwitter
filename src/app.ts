@@ -1,5 +1,4 @@
 import express = require('express');
-import fs = require('fs');
 import compression = require('compression');
 import helmet = require('helmet');
 import passportInit = require('./lib/passport');
@@ -23,7 +22,7 @@ app.get('/', (req: any, res: express.Response) => {
    if (!req.user) {
       res.redirect('/account/login');
    } else {
-      _.html('Home', _.part('Home'), req);
+      res.send(_.html.auto('index', { title: 'Kiwitter', repArr: ['Home'] }));
    }
 });
 

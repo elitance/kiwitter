@@ -22,9 +22,9 @@ export = (app: express.Application): object => {
       usernameField: 'un',
       passwordField: 'pw',
    }, (un, pw, done) => {
-      db.query('select * from account where un = ? and pw = ?', [un, _.crypto(pw)], (err, account) => {
+      db.query('select * from account where un = ? and pw = ? and vrf = 1', [un, _.crypto(pw)], (err, account) => {
          if (!account[0]) {
-            db.query('select * from account where email = ? and pw = ?', [un, _.crypto(pw)], (err, account) => {
+            db.query('select * from account where email = ? and pw = ? and vrf = 1', [un, _.crypto(pw)], (err, account) => {
                if (!account[0]) {
                   return done(null, false, { message: 'Incorrect username or password.' });
                } else {
