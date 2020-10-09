@@ -57,7 +57,7 @@ fieldset {
    font-size: 18px;
    pointer-events: none;
    user-select: none;
-   transition: top .2s, left .2s, font-size .2s;
+   transition: top .2s, left .2s, font-size .2s, color .2s;
 }
 
 .input .bar {

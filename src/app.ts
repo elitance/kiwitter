@@ -6,7 +6,7 @@ import passportInit = require('./lib/passport');
 import _ = require('./lib/_');
 import session = require('./lib/session');
 import account = require('./router/account');
-import tweet = require('./router/tweet');
+// import tweet = require('./router/tweet');
 
 const app: express.Application = express();
 
