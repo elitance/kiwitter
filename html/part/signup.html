@@ -2,36 +2,55 @@
 <h3>See what’s happening in the world right now.</h3>
 ${1}
 <div class="input">
-    <input type="text" name="fn" required class="nf">
-    <div class="bar"></div>
-    <label>First Name</label>
+    <div class="input-inner">
+        <label>First Name</label>
+        <input type="text" name="fn" required class="nf">
+        <div class="bar"></div>
+    </div>
+    <i></i>
+    <div class="details">Please omit your middle name.</div>
 </div>
 <div class="input">
-    <input type="text" name="ln" required class="nf">
-    <div class="bar"></div>
-    <label>Last Name</label>
+    <div class="input-inner">
+        <label>Last Name</label>
+        <input type="text" name="ln" required class="nf">
+        <div class="bar"></div>
+    </div>
 </div>
 <div class="input">
-    <input type="text" name="un" required class="un">
-    <div class="bar"></div>
-    <label>Username</label>
+    <div class="input-inner">
+        <label>Username</label>
+        <input type="text" name="ln" required class="un">
+        <div class="bar"></div>
+    </div>
+    <i></i>
+    <div class="details">Length should be over 6 and under 30.</div>
 </div>
 <div class="input">
-    <input type="password" name="pw" required>
-    <div class="bar"></div>
-    <label>Password</label>
+    <div class="input-inner">
+        <label>Password</label>
+        <input type="text" name="pw" required>
+        <div class="bar"></div>
+    </div>
+    <i></i>
+    <div class="details">Length should be over 8 and under 30.<br>One number, upper/lowercase required.</div>
 </div>
 <div class="input">
-    <input type="password" name="cPw" required>
-    <div class="bar"></div>
-    <label>Confirm Password</label>
+    <div class="input-inner">
+        <label>Confirm Password</label>
+        <input type="text" name="cPw" required>
+        <div class="bar"></div>
+    </div>
 </div>
 <div class="input" style="margin-top: 50px">
-    <input type="email" name="email" required>
-    <div class="bar"></div>
-    <label>Email</label>
+    <div class="input-inner">
+        <label>Email</label>
+        <input type="email" name="email" required>
+        <div class="bar"></div>
+    </div>
 </div>
 <fieldset disabled>
     <button type="submit" class="fill">Sign Up</button>
 </fieldset>
 <script src="/js/password.js"></script>
+<script src="/js/label.js"></script>

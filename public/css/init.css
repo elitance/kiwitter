@@ -29,18 +29,31 @@ fieldset {
    border: none;
 }
 
+i {
+   font-style: normal;
+}
+
 ::-webkit-scrollbar {
    width: 0;
 }
 
 .input {
+   display: flex;
    height: 50px;
    margin: 40px 0 40px 0;
+   align-items: center;
+}
+
+.input .input-inner {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+   align-self: flex-end;
 }
 
 .input input {
    display: block;
-   padding: 10px 10px 10px 5px;
+   padding: 0 10px 5px 5px;
    border: none;
    width: 320px;
    background: none;
@@ -50,38 +63,55 @@ fieldset {
 }
 
 .input label {
-   position: relative;
-   top: -30px;
-   left: 5px;
+   margin: 0 0 -22.5px 5px;
    color: #999;
    font-size: 18px;
    pointer-events: none;
    user-select: none;
-   transition: top .2s, left .2s, font-size .2s, color .2s;
+   transition: margin .2s, font-size .2s, color .2s;
 }
 
 .input .bar {
-   position: relative;
-   bottom: 1.5px;
    width: 0;
+   margin-top: -2px;  
    height: 2.5px;
    background: #1da1f2;
    border-radius: 2px;
    transition: width .4s;
 }
 
-.input input:focus ~ label, .input input:valid ~ label {
-   top: -60px;
-   left: 0;
-   font-size: 14px;
+label.focus {
+   color: #1da1f2;
 }
 
-.input input:focus ~ label {
-   color: #1da1f2;
+label.focus, label.valid {
+   margin: 0 0 3px 0;
+   font-size: 14px;
 }
 
 .input input:focus ~ .bar {
    width: 320px;
+}
+
+.input i {
+   font-size: 14px;
+   cursor: help;
+}
+
+.input i:hover ~ .details {
+   filter: opacity(1);
+}
+
+.input .details {
+   display: inline-block;
+   margin-left: 10px;
+   font-size: 14px;
+   background: rgba(0,0,0,.7);
+   border-radius: 2px;
+   color: white;
+   filter: opacity(0);
+   padding: 5px;
+   transition: filter .25s;
 }
 
 button.fill {
@@ -99,7 +129,6 @@ button.fill {
 
 button.fill i {
    margin-right: 5px;
-   font-style: normal;
 }
 
 button.fill:hover {

@@ -26,4 +26,4 @@ app.get('/', (req: any, res: express.Response) => {
    }
 });
 
-app.listen(3000, 'localhost');
+app.listen(80, 'localhost');
