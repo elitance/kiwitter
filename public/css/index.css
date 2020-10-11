@@ -6,21 +6,18 @@ body {
    justify-content: center;
 }
 
-main {
+.root {
    display: flex;
    height: 100%;
    width: 60%;
 }
 
-main > div {
-   padding: 15px;
-   border-left: 1px solid gray;
-}
-
 .sidebar {
+   padding: 15px;
    border-left: none;
    flex-basis: 20%;
    background: white;
+   border-right: 1px solid gray;
 }
 
 .sidebar > a {
@@ -61,12 +58,13 @@ main > div {
    align-self: center;
 }
 
-.main {
+main {
+   padding: 30px;
    flex-basis: 80%;
 }
 
-.main h1 {
-   margin: 25px 15px 15px 15px;
+main h1 {
+   margin: 5px 0 15px 0;
    padding: 0 0 5px 5px;
    border-bottom: 4px solid rgba(29, 161, 242, .5);
 }

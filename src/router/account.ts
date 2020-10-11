@@ -50,7 +50,7 @@ export = (passport: any): express.IRouter => {
          let stat: string = ' ';
 
          if (query.stat === 'fail') stat = '<span class="addit fail"><i></i> Incorrect username or password. Please try again.</span>';
-         res.send(_.html.auto('account', { title: 'Log In', part: 'login', stat }));
+         _.html.send('account', { title: 'Log In', part: 'login', stat, res });
       }
    });
 
@@ -71,7 +71,7 @@ export = (passport: any): express.IRouter => {
 
          if (query.stat === 'fail') stat = '<span class="addit fail"><i></i> Account with the same username or email already exists.<br>Try again with another one.</span>';
          else if (query.stat === 'success') stat = '<span class="addit success"><i></i> You are almost done! Go to your mail inbox, and verify your account!</span>';
-         res.send(_.html.auto('account', { title: 'Sign Up', part: 'signup', stat }));
+         _.html.send('account', { title: 'Sign Up', part: 'signup', stat, res });
       }
    });
 

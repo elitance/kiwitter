@@ -9,7 +9,7 @@
       <link rel="icon" href="/img/favicon.ico">
    </head>
    <body>
-      <main>
+      <div class="root">
          <div class="sidebar">
             <a href="/" class="button-light">
                <img src="/img/twitter.svg">
@@ -23,9 +23,12 @@
                <a href="/tweet/new" class="button">Tweet</a>
             </div>
          </div>
-         <div class="main">
+         <main>
             <h1>${1}</h1>
-         </div>
-      </main>
+            <div class="content">
+               ${2}
+            </div>
+         </main>
+      </div>
    </body>
 </html>

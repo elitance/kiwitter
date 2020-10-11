@@ -1,10 +1,12 @@
 import fs = require('fs');
 import crypto = require('crypto');
+import express = require('express');
 
 interface TemplateOption {
    title: string;
    stat?: string;
    part?: string;
+   res?: express.Response;
    repArr?: string[];
 }
 
@@ -20,19 +22,29 @@ export = {
          }
          return result;
       },
-      auto: function(page: string, option: TemplateOption): string {
-         let base = fs.readFileSync(`./html/${page}.html`, 'utf-8').replace('${t}', option.title);
-         if (option.stat && option.part && !option.repArr) {
-            const part = this.part(option.part, [option.stat]);
-            return base.replace('${1}', part);
-         } else if (option.part && !option.stat && !option.repArr) {
-            const part = this.part(option.part);
-            return base.replace('${1}', part);
-         } else if (option.repArr && !option.stat && !option.part) {
-            return this.part('../index', option.repArr).replace('${t}', option.title);
+      send: function(page: string, options: TemplateOption): string | void {
+         let base: string = fs.readFileSync(`./html/${page}.html`, 'utf-8').replace('${t}', options.title);
+         let result: string;
+         if (options.stat && options.part && !options.repArr) {
+            const part = this.part(options.part, [options.stat]);
+            result = base.replace('${1}', part);
+         } else if (options.part && !options.stat && !options.repArr) {
+            const part = this.part(options.part);
+            result = base.replace('${1}', part);
+         } else if (options.repArr && !options.stat && !options.part) {
+            result = this.part('../index', options.repArr).replace('${t}', options.title);
          } else {
-            return base;
+            result = base;
          }
+
+         if (options.res) {
+            options.res.send(result);
+         } else {
+            return result;
+         }
+      },
+      notFound: function(res: express.Response): void {
+         this.send('index', { title: 'Not Found', repArr: ['Not Found', 'The page you are looking for doesn\'t exist. Try again with different URL.'], res });
       }
    },
    crypto: (string: string): string => {
