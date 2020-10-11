@@ -1,5 +1,3 @@
 node_modules
 dist
-src/lib/mail.ts
-src/lib/mysql.ts
-src/lib/session.ts
+profile.json
