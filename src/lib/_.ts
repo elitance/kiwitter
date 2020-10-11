@@ -15,10 +15,11 @@ export = {
       part: (file: string, repArr?: string[]): string => {
          let result: string = fs.readFileSync(`./html/part/${file}.html`, 'utf-8');
          if (repArr) {
-            for (var i = 0; i <= repArr.length; i++) {
+            for (var i = 0; i < repArr.length; i++) {
                var regex: string = '\\$\\{' + (i + 1).toString() + '\\}';
                result = result.replace(new RegExp(regex, 'g'), repArr[i]);
             }
+            result = result.replace(/\$\{[1-9]\}/g, '')
          }
          return result;
       },
@@ -26,10 +27,10 @@ export = {
          let base: string = fs.readFileSync(`./html/${page}.html`, 'utf-8').replace('${t}', options.title);
          let result: string;
          if (options.stat && options.part && !options.repArr) {
-            const part = this.part(options.part, [options.stat]);
+            const part: string = this.part(options.part, [options.stat]);
             result = base.replace('${1}', part);
          } else if (options.part && !options.stat && !options.repArr) {
-            const part = this.part(options.part);
+            const part: string = this.part(options.part);
             result = base.replace('${1}', part);
          } else if (options.repArr && !options.stat && !options.part) {
             result = this.part('../index', options.repArr).replace('${t}', options.title);

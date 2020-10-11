@@ -15,7 +15,7 @@ app.use(compression());
 app.use(helmet());
 app.use(session());
 app.use(express.static('public'));
-const passport = passportInit(app);
+const passport: object = passportInit(app);
 app.use('/account', account(passport));
 // app.use('/tweet', tweet);
 
@@ -23,7 +23,7 @@ app.get('/', (req: any, res: express.Response) => {
    if (!req.user) {
       res.redirect('/account/login');
    } else {
-      _.html.send('index', { title: 'Kiwitter', res, repArr: ['Home', ''] });
+      _.html.send('index', { title: 'Kiwitter', res, repArr: ['Home'] });
    }
 });
 
