@@ -19,7 +19,7 @@ export = {
                var regex: string = '\\$\\{' + (i + 1).toString() + '\\}';
                result = result.replace(new RegExp(regex, 'g'), repArr[i]);
             }
-            result = result.replace(/\$\{[1-9]\}/g, '')
+            result = result.replace(/\$\{[1-9]\}/g, '');
          }
          return result;
       },
@@ -28,12 +28,13 @@ export = {
          let result: string;
          if (options.stat && options.part && !options.repArr) {
             const part: string = this.part(options.part, [options.stat]);
-            result = base.replace('${1}', part);
+            result = base.replace('${c}', part);
          } else if (options.part && !options.stat && !options.repArr) {
             const part: string = this.part(options.part);
-            result = base.replace('${1}', part);
-         } else if (options.repArr && !options.stat && !options.part) {
-            result = this.part('../index', options.repArr).replace('${t}', options.title);
+            result = base.replace('${c}', part);
+         } else if (options.part && options.repArr && !options.stat) {
+            const part: string = this.part(options.part, options.repArr);
+            result = base.replace('${c}', part);
          } else {
             result = base;
          }
@@ -45,7 +46,7 @@ export = {
          }
       },
       notFound: function(res: express.Response): void {
-         this.send('index', { title: 'Not Found', repArr: ['Not Found', 'The page you are looking for doesn\'t exist. Try again with different URL.'], res });
+         this.send('base', { title: 'Not Found', part: 'home', repArr: ['Not Found', 'The page you are looking for doesn\'t exist. Try again with different URL.'] });
       }
    },
    crypto: (string: string): string => {

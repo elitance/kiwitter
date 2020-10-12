@@ -114,21 +114,39 @@ label.focus, label.valid {
    transition: filter .25s;
 }
 
-button.fill {
+button.unfill, button.fill {
    height: 50px;
    width: 200px;
-   border: none;
-   background: #1da1f2;
-   color: white;
    font-size: 18px;
    font-weight: 500;
    border-radius: 25px;
    cursor: pointer;
-   transition: background .2s;
+   transition: background .2s, color .2s, filter .2s;
+}
+
+.loading {
+   filter: opacity(.6);
+   pointer-events: none;
+}
+
+button.unfill {
+   border: 1.5px solid #1da1f2;
+   background: none;
+}
+
+button.fill {
+   border: none;
+   background: #1da1f2;
+   color: white;
 }
 
 button.fill i {
    margin-right: 5px;
+}
+
+button.unfill:hover {
+   background: rgba(29, 161, 242, .2);
+   color: #1da1f2;
 }
 
 button.fill:hover {
