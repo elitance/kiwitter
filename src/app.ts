@@ -28,6 +28,11 @@ app.get('/', (req: any, res: express.Response) => {
    }
 });
 
+app.get('/profile', (req: any, res: express.Response) => {
+   if (!req.user) res.redirect('/account/login');
+   res.redirect(`/${req.user.un}`);
+});
+
 app.get('/:username', (req: any, res: express.Response) => {
    db.query('select * from account where un = ?', [req.params.username], (err, account) => {
       if (account[0]) {
@@ -39,37 +44,38 @@ app.get('/:username', (req: any, res: express.Response) => {
    });
 });
 
-app.get('/profile', (req: any, res: express.Response) => {
-   res.redirect(`/${req.user.un}`);
-});
-
 app.put('/:username/follow', (req: any, res: express.Response) => {
    db.query('select * from account where un = ?', [req.user.un], (err, myAccount) => {
       db.query('select * from account where un = ?', [req.params.username], (err, account) => {
-         if (!account[0].followers) {
-            db.query('update account set followers = ? where un = ?', [myAccount[0].id, req.params.username], (err, acc) => {
-               res.send();
-            });
-         } else {
-            const query: any = url.parse(req.url, true).query;
-            let already: boolean = false;
+         const query: any = url.parse(req.url, true).query;
+         let following: boolean = false;
+
+         if (account[0].followers) {
             account[0].followers.split(', ').forEach((id: string) => {
-               if (id === myAccount[0].id) already = true;
+               if (id === myAccount[0].id.toString()) following = true;
             });
-            if (query.option === 'check') {
-               res.send(already);
-            } else if (query.option === 'unfollow') {
-               let result: string = '';
-               account[0].followers.split(', ').forEach((id: string) => {
-                  if (id !== myAccount[0].id) result += `, ${id}`;
-               });
-               db.query('update account set followers = ? where un = ?', [result.slice(2), req.params.username], (err, acc) => {
+         } 
+
+         if (query.do === 'follow' && !following) {
+            if (!account[0].followers) {
+               db.query('update account set followers = ? where un = ?', [myAccount[0].id, account[0].un], (err, acc) => {
                   res.send();
                });
             } else {
-               if (!already) db.query('update account set followers = ? where un = ?', [`${account[0].followers}, ${myAccount[0].id}`, req.params.username]);
-               res.send();
+               db.query('update account set followers = ? where un = ?', [`${account[0].followers}, ${myAccount[0].id}`, account[0].un], (err, acc) => {
+                  res.send();
+               });
             }
+         } else if (query.do === 'unfollow' && following) {
+            let followers: string = '';
+            account[0].followers.split(', ').forEach((id: string) => {
+               if (id !== myAccount[0].id.toString()) followers += `, ${id}`;
+            });
+            db.query('update account set followers = ? where un = ?', [followers.slice(2), account[0].un], (err, acc) => {
+               res.send();
+            });
+         } else if (query.do === 'check') {
+            res.send(following);
          }
       });
    });

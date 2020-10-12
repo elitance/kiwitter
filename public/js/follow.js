@@ -19,19 +19,20 @@ const indicate = {
 }
 
 indicate.loading();
-fetch(`${location.href}/follow?option=check`, { method: 'PUT' }).then((res) => {
-    if (res) indicate.following();
+fetch(`${location.href}/follow?do=check`, { method: 'PUT' }).then(async(response) => {
+    const following = await response.json();
+    if (following) indicate.following();
     else indicate.follow();
-})
+});
 
 follow.addEventListener('click', (e) => {
     indicate.loading();
     if (e.target.classList.contains('fill')) {
-        fetch(`${location.href}/follow?option=unfollow`, { method: 'PUT' }).then((res) => {
+        fetch(`${location.href}/follow?do=unfollow`, { method: 'PUT' }).then((res) => {
             indicate.follow();
         });
     } else {
-        fetch(`${location.href}/follow`, { method: 'PUT' }).then((res) => {
+        fetch(`${location.href}/follow?do=follow`, { method: 'PUT' }).then((res) => {
             indicate.following();
         });
     }
