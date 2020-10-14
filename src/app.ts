@@ -20,16 +20,15 @@ const passport: object = passportInit(app);
 app.use('/account', account(passport));
 // app.use('/tweet', tweet);
 
+app.get('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+   !req.user ? res.redirect('/account/login') : next();
+});
+
 app.get('/', (req: any, res: express.Response) => {
-   if (!req.user) {
-      res.redirect('/account/login');
-   } else {
-      _.html.send('base', { title: 'Kiwitter', res, part: 'home', repArr: ['Home'] });
-   }
+   _.html.send('base', { title: 'Kiwitter', res, part: 'home', repArr: ['Home'] });
 });
 
 app.get('/profile', (req: any, res: express.Response) => {
-   if (!req.user) res.redirect('/account/login');
    res.redirect(`/${req.user.un}`);
 });
 
@@ -39,9 +38,9 @@ app.get('/:username', (req: any, res: express.Response) => {
          const name: string = `${account[0].fn} ${account[0].ln}`;
          let button: string = 'follow';
          if (req.params.username === req.user.un) button = 'accPrf';
-         _.html.send('base', { title: `${name} - ${req.params.username}`, part: 'profile', repArr: [name, `@${req.params.username}`, button], res });
+         _.html.send('base', { title: `${name} - @${req.params.username}`, part: 'profile', repArr: [name, req.params.username, button], res });
       } else {
-         _.html.notFound(res);
+         _.html.notFound(res); // Functions as not found page indicator
       }
    });
 });

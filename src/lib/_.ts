@@ -27,7 +27,7 @@ export = {
          let base: string = fs.readFileSync(`./html/${page}.html`, 'utf-8').replace('${t}', options.title);
          let result: string;
          if (options.stat && options.part && !options.repArr) {
-            const part: string = this.part(options.part, [options.stat]);
+            const part: string = this.part(options.part).replace('${s}', options.stat);
             result = base.replace('${c}', part);
          } else if (options.part && !options.stat && !options.repArr) {
             const part: string = this.part(options.part);
@@ -46,10 +46,13 @@ export = {
          }
       },
       notFound: function(res: express.Response): void {
-         this.send('base', { title: 'Not Found', part: 'home', repArr: ['Not Found', 'The page you are looking for doesn\'t exist. Try again with different URL.'] });
+         this.send('base', { title: 'Not Found', part: 'home', res, repArr: ['Not Found', 'The page you are looking for doesn\'t exist. Try again with different URL.'] });
       }
    },
    crypto: (string: string): string => {
       return crypto.createHash('sha512').update(string).digest('base64');
    },
+   loginCheck: (req: express.Request, res: express.Response): void => {
+      if (!req.user) res.redirect('/account/login');
+   }
 };

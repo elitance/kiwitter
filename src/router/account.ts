@@ -91,11 +91,21 @@ export = (passport: any): express.IRouter => {
    });
 
    router.get('/logout', (req: express.Request, res: express.Response) => {
+      _.loginCheck(req, res);
       req.logout();
       req.session?.destroy((err: Error) => {
          if (err) throw err;
+         res.redirect('/account/login');
       });
-      res.redirect('/account/login');
+   });
+
+   router.get('/preferences', (req: express.Request, res: express.Response) => {
+      _.loginCheck(req, res);
+      const query: any = url.parse(req.url, true).query;
+      let stat: string = ' ';
+
+      if (query.stat === 'success') stat = '<span class="addit success"><i></i> Account preferences saved.</span>';
+      _.html.send('account', { title: 'Account Preferences', part: 'preferences', stat, res });
    });
 
    return router;

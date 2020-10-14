@@ -1,4 +1,4 @@
 const follow = document.querySelector('.opt button');
 
-follow.innerText = 'Account Settings';
-follow.addEventListener('click', (e) => {location.href = '/account/settings'})
+follow.innerText = 'Preferences';
+follow.addEventListener('click', (e) => {location.href = '/account/preferences'});
