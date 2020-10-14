@@ -121,7 +121,7 @@ button.unfill, button.fill {
    font-weight: 500;
    border-radius: 25px;
    cursor: pointer;
-   transition: background .2s, color .2s, filter .2s;
+   transition: background .2s, filter .2s;
 }
 
 .loading {
@@ -132,6 +132,7 @@ button.unfill, button.fill {
 button.unfill {
    border: 1.5px solid #1da1f2;
    background: none;
+   color: #1da1f2;
 }
 
 button.fill {
@@ -146,7 +147,6 @@ button.fill i {
 
 button.unfill:hover {
    background: rgba(29, 161, 242, .2);
-   color: #1da1f2;
 }
 
 button.fill:hover {
@@ -161,7 +161,7 @@ a.text:hover {
    text-decoration: underline;
 }
 
-a.button, a.button-light {
+a.button, a.link-menu {
    display: flex;
    align-items: center;
    justify-content: center;
@@ -192,11 +192,11 @@ span.addit i {
    font-style: normal;
 }
 
-a.button-light {
+a.link-menu {
    padding: 0 25px 0 25px;
 }
 
-a.button-light:hover {
+a.link-menu:hover {
    color: #1da1f2;
    background: rgba(29, 161, 242, .2);
 }

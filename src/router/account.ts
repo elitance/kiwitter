@@ -25,6 +25,7 @@ class Account {
             db.query('select * from account where email = ?', [this.email], (err, account) => {
                if (!account[0]) {
                   db.query('insert into account (un, pw, email, fn, ln, vrf) values (?, ?, ?, ?, ?, ?)', [this.un, _.crypto(this.pw), this.email, this.fn, this.ln, 0], (err, account) => {
+                     if (err) throw err;
                      mail.verify(this.email, account.insertId);
                      res.redirect('/account/signup?stat=success');
                   });
@@ -82,11 +83,19 @@ export = (passport: any): express.IRouter => {
 
    router.get('/verify', (req: express.Request, res: express.Response) => {
       const query: any = url.parse(req.url, true).query;
-      if (query.type === 'email') {
+      if (query.id) {
          db.query('update account set vrf = 1 where id = ?', [query.id], (err, account) => {
             res.redirect('/account/login');
          });
       }
+   });
+
+   router.get('/logout', (req: express.Request, res: express.Response) => {
+      req.logout();
+      req.session?.destroy((err: Error) => {
+         if (err) throw err;
+      });
+      res.redirect('/account/login');
    });
 
    return router;

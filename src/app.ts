@@ -36,8 +36,10 @@ app.get('/profile', (req: any, res: express.Response) => {
 app.get('/:username', (req: any, res: express.Response) => {
    db.query('select * from account where un = ?', [req.params.username], (err, account) => {
       if (account[0]) {
-         const name = `${account[0].fn} ${account[0].ln}`;
-         _.html.send('base', { title: `${name} - ${req.params.username}`, part: 'profile', repArr: [name, `@${req.params.username}`], res });
+         const name: string = `${account[0].fn} ${account[0].ln}`;
+         let button: string = 'follow';
+         if (req.params.username === req.user.un) button = 'accPrf';
+         _.html.send('base', { title: `${name} - ${req.params.username}`, part: 'profile', repArr: [name, `@${req.params.username}`, button], res });
       } else {
          _.html.notFound(res);
       }

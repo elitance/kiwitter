@@ -20,16 +20,14 @@ body {
    border-right: 1px solid gray;
 }
 
-.sidebar > a {
+.sidebar > a:first-child {
+   display: flex;
+   flex-direction: column;
    width: 55px;
    height: 55px;
    padding: 0;
    border-radius: 27.5px;
    transition: background 0.2s;
-}
-
-.sidebar > a:hover {
-   background: rgba(29, 161, 242, 0.2);
 }
 
 .sidebar img {
@@ -41,21 +39,24 @@ body {
    display: flex;
    flex-direction: column;
    align-items: flex-end;
-   padding: 15px;
    margin-top: 30px;
    height: 70%;
 }
 
-.sidebar .menu a {
+.sidebar a {
    margin-bottom: 5px;
    height: 50px;
    border-radius: 25px;
 }
 
 .sidebar .menu a:last-child {
-   width: 85%;
+   width: 90%;
    margin-top: 30px;
    align-self: center;
+}
+
+.sidebar button {
+   width: 95%;
 }
 
 main {
