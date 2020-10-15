@@ -45,7 +45,7 @@ router.get('/signin', (req: any, res: express.Response) => {
    if (req.session.un) {
       res.redirect('/');
    } else {
-      _.html.send('account', { title: 'Log In', part: 'signin', res });
+      _.html.send('account', { title: 'Sign In', part: 'signin', res });
    }
 });
 
