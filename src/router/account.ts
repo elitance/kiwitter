@@ -4,6 +4,7 @@ import db = require('../lib/mysql');
 import _ = require('../lib/_');
 import mail = require('../lib/mail');
 
+const router: express.IRouter = express.Router();
 class Account {
    private un: string;
    private pw: string;
@@ -40,73 +41,68 @@ class Account {
    }
 }
 
-export = (passport: any): express.IRouter => {
-   const router: express.IRouter = express.Router();
+router.get('/signin', (req: any, res: express.Response) => {
+   if (req.session.un) {
+      res.redirect('/');
+   } else {
+      _.html.send('account', { title: 'Log In', part: 'signin', res });
+   }
+});
 
-   router.get('/login', (req: express.Request, res: express.Response) => {
-      if (req.user) {
-         res.redirect('/');
+router.post('/signin', (req: any, res: express.Response) => {
+   db.query('select * from account where un = ? and pw = ? and vrf = 1', [req.body.un, _.crypto(req.body.pw)], (err, account) => {
+      if (!account[0]) {
+         res.send(false);
       } else {
-         const query: any = url.parse(req.url, true).query;
-         let stat: string = ' ';
-
-         if (query.stat === 'fail') stat = '<span class="addit fail"><i></i> Incorrect username or password. Please try again.</span>';
-         _.html.send('account', { title: 'Log In', part: 'login', stat, res });
+         req.session.un = req.body.un;
+         req.session.pw = _.crypto(req.body.pw);
+         req.session.cookie.maxAge = 31536000000;
+         res.send(true);
       }
    });
+});
 
-   router.post('/login', (req: any, res: express.Response, next: express.NextFunction) => {
-      req.session.cookie.maxAge = 31536000000;
-      next();
-   }, passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: '/account/login?stat=fail',
-   }));
-
-   router.get('/signup', (req: express.Request, res: express.Response) => {
-      if (req.user) {
-         res.redirect('/');
-      } else {
-         const query: any = url.parse(req.url, true).query;
-         let stat: string = ' ';
-
-         if (query.stat === 'fail') stat = '<span class="addit fail"><i></i> Account with the same username or email already exists.<br>Try again with another one.</span>';
-         else if (query.stat === 'success') stat = '<span class="addit success"><i></i> You are almost done! Go to your mail inbox, and verify your account!</span>';
-         _.html.send('account', { title: 'Sign Up', part: 'signup', stat, res });
-      }
-   });
-
-   router.post('/signup', (req: express.Request, res: express.Response) => {
-      const user: Account = new Account(req.body.un, req.body.pw, req.body.email, req.body.fn, req.body.ln);
-      user.overlapCheck(res);
-   });
-
-   router.get('/verify', (req: express.Request, res: express.Response) => {
-      const query: any = url.parse(req.url, true).query;
-      if (query.id) {
-         db.query('update account set vrf = 1 where id = ?', [query.id], (err, account) => {
-            res.redirect('/account/login');
-         });
-      }
-   });
-
-   router.get('/logout', (req: express.Request, res: express.Response) => {
-      _.loginCheck(req, res);
-      req.logout();
-      req.session?.destroy((err: Error) => {
-         if (err) throw err;
-         res.redirect('/account/login');
-      });
-   });
-
-   router.get('/preferences', (req: express.Request, res: express.Response) => {
-      _.loginCheck(req, res);
+router.get('/signup', (req: any, res: express.Response) => {
+   if (req.session.un) {
+      res.redirect('/');
+   } else {
       const query: any = url.parse(req.url, true).query;
       let stat: string = ' ';
 
-      if (query.stat === 'success') stat = '<span class="addit success"><i></i> Account preferences saved.</span>';
-      _.html.send('account', { title: 'Account Preferences', part: 'preferences', stat, res });
-   });
+      if (query.stat === 'fail') stat = '<span class="addit fail"><i></i> Account with the same username or email already exists.<br>Try again with another one.</span>';
+      else if (query.stat === 'success') stat = '<span class="addit success"><i></i> You are almost done! Go to your mail inbox, and verify your account!</span>';
+      _.html.send('account', { title: 'Sign Up', part: 'signup', stat, res });
+   }
+});
 
-   return router;
-};
+router.post('/signup', (req: express.Request, res: express.Response) => {
+   const user: Account = new Account(req.body.un, req.body.pw, req.body.email, req.body.fn, req.body.ln);
+   user.overlapCheck(res);
+});
+
+router.get('/verify', (req: express.Request, res: express.Response) => {
+   const query: any = url.parse(req.url, true).query;
+   if (query.id) {
+      db.query('update account set vrf = 1 where id = ?', [query.id], (err, account) => {
+         res.redirect('/account/signin');
+      });
+   }
+});
+
+router.delete('/signout', (req: express.Request, res: express.Response) => {
+   req.session?.destroy((err: Error) => {
+      if (err) throw err;
+      res.send()
+   });
+});
+
+router.get('/preferences', (req: express.Request, res: express.Response) => {
+   _.loginCheck(req, res);
+   const query: any = url.parse(req.url, true).query;
+   let stat: string = ' ';
+
+   if (query.stat === 'success') stat = '<span class="addit success"><i></i> Account preferences saved.</span>';
+   _.html.send('account', { title: 'Account Preferences', part: 'preferences', stat, res });
+});
+
+export = router;

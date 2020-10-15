@@ -185,6 +185,12 @@ span.addit {
    font-size: 15px;
    white-space: pre;
    margin: 15px 0 15px 0;
+   filter: opacity(0);
+   transition: filter .2s;
+}
+
+span.addit.show {
+   filter: opacity(1);
 }
 
 span.addit i {

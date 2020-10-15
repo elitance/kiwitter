@@ -52,7 +52,7 @@ export = {
    crypto: (string: string): string => {
       return crypto.createHash('sha512').update(string).digest('base64');
    },
-   loginCheck: (req: express.Request, res: express.Response): void => {
-      if (!req.user) res.redirect('/account/login');
+   loginCheck: (req: any, res: express.Response): void => {
+      if (!req.session.un) res.redirect('/account/login');
    }
 };
