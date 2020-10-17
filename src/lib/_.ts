@@ -4,7 +4,6 @@ import express = require('express');
 
 interface TemplateOption {
    title: string;
-   stat?: string;
    part?: string;
    res?: express.Response;
    repArr?: string[];
@@ -26,13 +25,13 @@ export = {
       send: function(page: string, options: TemplateOption): string | void {
          let base: string = fs.readFileSync(`./html/${page}.html`, 'utf-8').replace('${t}', options.title);
          let result: string;
-         if (options.stat && options.part && !options.repArr) {
-            const part: string = this.part(options.part).replace('${s}', options.stat);
-            result = base.replace('${c}', part);
-         } else if (options.part && !options.stat && !options.repArr) {
+         if (options.part && !options.repArr) {
             const part: string = this.part(options.part);
             result = base.replace('${c}', part);
-         } else if (options.part && options.repArr && !options.stat) {
+         } else if (options.part && !options.repArr) {
+            const part: string = this.part(options.part);
+            result = base.replace('${c}', part);
+         } else if (options.part && options.repArr) {
             const part: string = this.part(options.part, options.repArr);
             result = base.replace('${c}', part);
          } else {

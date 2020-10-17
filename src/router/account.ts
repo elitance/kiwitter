@@ -5,6 +5,7 @@ import _ = require('../lib/_');
 import mail = require('../lib/mail');
 
 const router: express.IRouter = express.Router();
+
 class Account {
    private un: string;
    private pw: string;
@@ -20,23 +21,24 @@ class Account {
       this.ln = ln;
    }
 
-   overlapCheck(res: express.Response): void {
-      db.query('select * from account where un = ?', [this.un], (err, account) => {
-         if (!account[0]) {
-            db.query('select * from account where email = ?', [this.email], (err, account) => {
-               if (!account[0]) {
-                  db.query('insert into account (un, pw, email, fn, ln, vrf) values (?, ?, ?, ?, ?, ?)', [this.un, _.crypto(this.pw), this.email, this.fn, this.ln, 0], (err, account) => {
-                     if (err) throw err;
-                     mail.verify(this.email, account.insertId);
-                     res.redirect('/account/signup?stat=success');
-                  });
-               } else {
-                  res.redirect('/account/signup?stat=fail');
-               }
-            });
-         } else {
-            res.redirect('/account/signup?stat=fail');
-         }
+   async overlapCheck(): Promise<boolean> {
+      return await new Promise((resolve, reject) => {
+         db.query('select * from account where un = ?', [this.un], (err, account) => {
+            if (!account[0]) {
+               db.query('select * from account where email = ?', [this.email], (err, account) => {
+                  if (!account[0]) {
+                     db.query('insert into account (un, pw, email, fn, ln, vrf) values (?, ?, ?, ?, ?, ?)', [this.un, _.crypto(this.pw), this.email, this.fn, this.ln, 0], (err, account) => {
+                        mail.verify(this.email, account.insertId);
+                        resolve(true);
+                     });
+                  } else {
+                     resolve(false);
+                  }
+               });
+            } else {
+               resolve(false);
+            }
+         });
       });
    }
 }
@@ -66,18 +68,14 @@ router.get('/signup', (req: any, res: express.Response) => {
    if (req.session.un) {
       res.redirect('/');
    } else {
-      const query: any = url.parse(req.url, true).query;
-      let stat: string = ' ';
-
-      if (query.stat === 'fail') stat = '<span class="addit fail"><i></i> Account with the same username or email already exists.<br>Try again with another one.</span>';
-      else if (query.stat === 'success') stat = '<span class="addit success"><i></i> You are almost done! Go to your mail inbox, and verify your account!</span>';
-      _.html.send('account', { title: 'Sign Up', part: 'signup', stat, res });
+      _.html.send('account', { title: 'Sign Up', part: 'signup', res });
    }
 });
 
-router.post('/signup', (req: express.Request, res: express.Response) => {
+router.post('/signup', async(req: express.Request, res: express.Response) => {
    const user: Account = new Account(req.body.un, req.body.pw, req.body.email, req.body.fn, req.body.ln);
-   user.overlapCheck(res);
+   const available: boolean = await user.overlapCheck();
+   res.send(available);
 });
 
 router.get('/verify', (req: express.Request, res: express.Response) => {
@@ -98,11 +96,7 @@ router.delete('/signout', (req: express.Request, res: express.Response) => {
 
 router.get('/preferences', (req: express.Request, res: express.Response) => {
    _.loginCheck(req, res);
-   const query: any = url.parse(req.url, true).query;
-   let stat: string = ' ';
-
-   if (query.stat === 'success') stat = '<span class="addit success"><i></i> Account preferences saved.</span>';
-   _.html.send('account', { title: 'Account Preferences', part: 'preferences', stat, res });
+   _.html.send('account', { title: 'Account Preferences', part: 'preferences', res });
 });
 
 export = router;

@@ -23,12 +23,6 @@ h3, h4, h5, h6 {
    font-weight: 600;
 }
 
-fieldset {
-   margin: 0;
-   padding: 0;
-   border: none;
-}
-
 i {
    font-style: normal;
 }
@@ -42,6 +36,7 @@ i {
    height: 50px;
    margin: 40px 0 40px 0;
    align-items: center;
+   transition: filter .2s;
 }
 
 .input .input-inner {
@@ -181,16 +176,16 @@ a.button:hover {
 }
 
 span.addit {
-   display: flex;
+   display: block;
    font-size: 15px;
    white-space: pre;
    margin: 15px 0 15px 0;
-   filter: opacity(0);
+   filter: opacity(1);
    transition: filter .2s;
 }
 
-span.addit.show {
-   filter: opacity(1);
+span.addit.hidden {
+   filter: opacity(0);
 }
 
 span.addit i {
@@ -207,22 +202,12 @@ a.link-menu:hover {
    background: rgba(29, 161, 242, .2);
 }
 
-.hidden {
-   display: none !important;
-}
-
 span.fail {
    color: #cb2431;
 }
 
 span.success {
    color: #2ea44f;
-}
-
-fieldset:disabled button {
-   background: rgb(29, 161, 242, .6);
-   border: 1.5px solid #1da1f2;
-   pointer-events: none;
 }
 
 .tweet {
