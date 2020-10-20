@@ -71,9 +71,9 @@ form.addEventListener('submit', (e) => {
             if (result) {
                 stat.classList.replace('fail', 'success');
                 stat.innerHTML = msg.signupSuccess;
-                document.querySelectorAll('.input, fieldset').forEach((div) => {
-                    div.classList.add('hidden');
-                    setTimeout(() => {div.style.display = 'none'}, 200);
+                document.querySelectorAll('.input, button').forEach((elt) => {
+                    elt.classList.add('hidden');
+                    setTimeout(() => {elt.style.display = 'none'}, 200);
                 });
             } else {
                 stat.innerHTML = msg.signupFail;

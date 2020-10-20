@@ -94,9 +94,4 @@ router.delete('/signout', (req: express.Request, res: express.Response) => {
    });
 });
 
-router.get('/preferences', (req: express.Request, res: express.Response) => {
-   _.loginCheck(req, res);
-   _.html.send('account', { title: 'Account Preferences', part: 'preferences', res });
-});
-
 export = router;

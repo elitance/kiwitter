@@ -5,6 +5,7 @@ import url = require('url');
 import _ = require('./lib/_');
 import session = require('./lib/session');
 import account = require('./router/account');
+import pref = require('./router/preferences');
 import db = require('./lib/mysql');
 
 const app: express.Application = express();
@@ -16,6 +17,7 @@ app.use(helmet());
 app.use(session());
 app.use(express.static('public'));
 app.use('/account', account);
+app.use('/preferences', pref);
 
 app.get('*', (req: any, res: express.Response, next: express.NextFunction) => {
    !req.session.un ? res.redirect('/account/signin') : next();
