@@ -55,7 +55,8 @@ body {
    align-self: center;
 }
 
-.sidebar button {
+.sidebar > button, .sidebar > a {
+   margin-bottom: 15px;
    width: 95%;
 }
 
