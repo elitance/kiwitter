@@ -31,6 +31,10 @@ i {
    width: 0;
 }
 
+button:focus, a:focus {
+   box-shadow: 0 0 0 4px #1da1f24d;
+}
+
 .input {
    display: flex;
    height: 50px;
@@ -116,7 +120,7 @@ button.unfill, button.fill, a.button-fill, a.button-unfill {
    font-weight: 500;
    border-radius: 25px;
    cursor: pointer;
-   transition: background .2s, filter .2s;
+   transition: background .2s, filter .2s, box-shadow .2s;
 }
 
 .loading {
@@ -150,6 +154,7 @@ button.fill:hover, a.button-fill:hover {
 
 a.text {
    color: #1da1f2;
+   box-shadow: none !important;
 }
 
 a.text:hover {
@@ -160,7 +165,7 @@ a.button-fill, a.button-unfill, a.link-menu {
    display: flex;
    align-items: center;
    justify-content: center;
-   transition: background .2s, color .2s;
+   transition: background .2s, color .2s, box-shadow .2s;
 }
 
 a.link-menu {

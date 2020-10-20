@@ -27,7 +27,7 @@ body {
    height: 55px;
    padding: 0;
    border-radius: 27.5px;
-   transition: background 0.2s;
+   transition: background .2s, box-shadow .2s;
 }
 
 .sidebar img {
