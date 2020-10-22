@@ -18,7 +18,7 @@ export = {
                var regex: string = '\\$\\{' + (i + 1).toString() + '\\}';
                result = result.replace(new RegExp(regex, 'g'), repArr[i]);
             }
-            result = result.replace(/\$\{[1-9]\}/g, '');
+            result = result.replace(/\$\{[0-9]\}/g, '');
          }
          return result;
       },

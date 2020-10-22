@@ -2,6 +2,13 @@ const prefCats = document.querySelectorAll('a.pref-menu');
 const catsArr = [...prefCats];
 const mtArr = [16, 72, 125, 182];
 
+if (location.hash) {
+    const hashElt = document.querySelector(location.hash);
+    document.querySelector('.current').classList.remove('current');
+    hashElt.classList.add('current');
+    document.querySelector('.bar').style.marginTop = mtArr[catsArr.indexOf(hashElt)].toString() + 'px';
+}
+
 prefCats.forEach((prefCat) => {
     prefCat.addEventListener('click', (e) => {
         e.preventDefault();
@@ -12,13 +19,6 @@ prefCats.forEach((prefCat) => {
         
         current.classList.remove('current');
         e.target.classList.add('current');
-        
-        // if (parseInt(mt.replace('px', '')) < bar.style.marginTop) bar.classList.add('up');
-        // else bar.classList.remove('up');
-
-        // bar.style.height = mt
-        // setTimeout(() => {
-        //     bar.style.height = '18px';
-        // }, 200);
+        window.history.pushState('', '', `#${e.target.innerHTML.toLowerCase()}`);
     });
 });

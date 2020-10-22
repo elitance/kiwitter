@@ -18,6 +18,7 @@ a.pref-menu {
     font-weight: 500;
     font-size: 18px;
     box-shadow: none !important;
+    cursor: pointer;
     transition: color .15s;
 }
 
