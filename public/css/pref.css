@@ -1,32 +1,45 @@
-a.catg {
+@import url('index.css');
+
+.sidebar .menu {
+    align-items: flex-start;
+}
+
+.sidebar .menu a:last-child {
+    width: unset;
+    margin-top: unset;
+    align-self: unset;
+}
+
+a.pref-menu {
     display: flex;
     align-items: center;
     height: 50px;
     padding: 10px;
     font-weight: 500;
-    border-bottom: 1.5px solid gray;
-    transition: color .2s, padding-left .2s;
+    font-size: 18px;
+    box-shadow: none !important;
+    transition: color .15s;
 }
 
-a.catg > div.bar {
-    filter: opacity(0);
-    height: 90%;
-    width: 2px;
-    background: #1da1f2;
-    border-radius: 1.5px;
-    transition: filter .2s;
-    margin-right: 5px;
-}
-
-a.catg:last-child {
-    border-bottom: none;
-}
-
-a.catg:hover {
-    padding-left: 5px;
+a.pref-menu.current {
     color: #1da1f2;
 }
 
-a.catg:hover > div.bar {
-    filter: opacity(1);
+.sidebar .menu .bar {
+    position: absolute;
+    background: #1da1f2;
+    width: 2px;
+    height: 18px;
+    border-radius: 1px;
+    /*
+
+    dist 1: 16px
+    dist 2: dist1 + 57
+    dist 3: dist2 + 57
+    dist 4: dist3 + 57
+    
+    */
+    margin-top: 16px;
+    margin-right: 5px;
+    transition: height .15s, margin-top .15s;
 }

@@ -171,6 +171,12 @@ a.button-fill, a.button-unfill, a.link-menu {
 a.link-menu {
    font-size: 18px;
    font-weight: 600;
+   padding: 0 25px 0 25px;
+}
+
+a.link-menu:hover {
+   color: #1da1f2;
+   background: rgba(29, 161, 242, .2);
 }
 
 span.addit {
@@ -189,15 +195,6 @@ span.addit.hidden {
 span.addit i {
    margin-right: 5px;
    font-style: normal;
-}
-
-a.link-menu {
-   padding: 0 25px 0 25px;
-}
-
-a.link-menu:hover {
-   color: #1da1f2;
-   background: rgba(29, 161, 242, .2);
 }
 
 span.fail {

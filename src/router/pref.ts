@@ -6,7 +6,8 @@ const router: express.IRouter = express.Router();
 
 router.get('/', (req: express.Request, res: express.Response) => {
     _.loginCheck(req, res);
-    _.html.send('base', { title: 'Preferences', part: 'preferences', res });
+    // res.redirect('/preferences/account');
+    _.html.send('pref', { title: 'Preferences', res });
 })
 
 export = router;

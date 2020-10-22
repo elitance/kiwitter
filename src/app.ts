@@ -5,7 +5,7 @@ import url = require('url');
 import _ = require('./lib/_');
 import session = require('./lib/session');
 import account = require('./router/account');
-import pref = require('./router/preferences');
+import pref = require('./router/pref');
 import db = require('./lib/mysql');
 
 const app: express.Application = express();
