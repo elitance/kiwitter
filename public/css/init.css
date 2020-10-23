@@ -123,8 +123,16 @@ button.unfill, button.fill, a.button-fill, a.button-unfill {
    transition: background .2s, filter .2s, box-shadow .2s;
 }
 
+button > img {
+   height: 50%;
+}
+
 .loading {
-   filter: opacity(.6);
+   pointer-events: none;
+}
+
+button.fill.loading {
+   background: #1da1f266;
    pointer-events: none;
 }
 

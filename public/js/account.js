@@ -6,17 +6,21 @@ const unRegex = /^[a-zA-Z0-9]+([_-]?[a-zA-Z0-9])*$/;
 const nameRegex = /^[a-zA-Z]+$/;
 const unavUn = ['explore', 'notifications', 'messages', 'tweet', 'account'];
 const form = document.querySelector('form');
+const submitBtn = document.querySelector('button[type=submit]');
 const stat = document.querySelector('span.fail');
 const isSigninPage = location.href.includes('signin') ? true : false;
 const msg = {
     signinFail: '<i></i> Incorrect username or password. Please try again.',
     signupFail: '<i></i> Account with the same username or email already exists.',
     signupSuccess: '<i></i> You are almost done! Go to your mail inbox, and verify your account!',
-    formatFail: '<i></i> Please follow the formats provided.'
+    formatFail: '<i></i> Please follow the formats provided.',
+    loading: '<img src="/img/oval.svg">'
 };
 
 
 function showStat() {
+    submitBtn.innerHTML = document.title;
+    submitBtn.classList.remove('loading');
     stat.classList.add('hidden');
     setTimeout(() => stat.classList.remove('hidden'), 250);
 }
@@ -51,6 +55,9 @@ form.addEventListener('submit', (e) => {
             return;
         }
     }
+
+    submitBtn.innerHTML = msg.loading;
+    submitBtn.classList.add('loading');
 
     fetch(location.href, {
         method: 'POST',

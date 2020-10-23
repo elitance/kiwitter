@@ -39,7 +39,7 @@ app.get('/:username', (req: any, res: express.Response) => {
          if (req.params.username === req.session.un) button = 'accPrf';
          _.html.send('base', { title: `${name} - @${req.params.username}`, part: 'profile', repArr: [name, req.params.username, button], res });
       } else {
-         _.html.notFound(res); // Functions as not found page indicator
+         _.html.notFound(res);
       }
    });
 });
@@ -79,6 +79,10 @@ app.put('/:username/follow', (req: any, res: express.Response) => {
          }
       });
    });
+});
+
+app.use((req: express.Request, res: express.Response) => {
+   _.html.notFound(res);
 });
 
 app.listen(80, 'localhost');

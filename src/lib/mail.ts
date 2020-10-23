@@ -24,7 +24,7 @@ export = {
                     Only one step left for your account: verification.
                     Please verify your account by clicking button below.
                 </p>
-                <a href="http://localhost/account/verify?type=email&id=${id}" style="margin-top: 30px; font-weight: 500; font-family: Google Sans !important; font-size: 18px; color: white; background: #1da1f2; border-radius: 25px; height: 50px !important; width: 150px !important; text-decoration: none;">Verify</a>
+                <a href="http://localhost/account/verify?type=email&id=${id}" style="margin-top: 30px; font-weight: 500; font-family: Google Sans !important; font-size: 18px; color: white; background: #1da1f2; border-radius: 25px; height: 50px; width: 150px; display: flex; align-items: center; justify-content: center; text-decoration: none;">Verify</a>
             </div>
             `,
             text: 'Welcome to Kiwitter!'

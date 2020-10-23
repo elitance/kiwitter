@@ -11,7 +11,6 @@ if (location.hash) {
 
 prefCats.forEach((prefCat) => {
     prefCat.addEventListener('click', (e) => {
-        e.preventDefault();
         const mt = mtArr[catsArr.indexOf(e.target)].toString() + 'px';
         const current = document.querySelector('.current');
         const bar = document.querySelector('.bar');
@@ -19,6 +18,5 @@ prefCats.forEach((prefCat) => {
         
         current.classList.remove('current');
         e.target.classList.add('current');
-        window.history.pushState('', '', `#${e.target.innerHTML.toLowerCase()}`);
     });
 });

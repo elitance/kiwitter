@@ -1,5 +1,13 @@
 @import url('index.css');
 
+.load {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    transition: filter .2s;
+}
+
 .sidebar .menu {
     align-items: flex-start;
 }

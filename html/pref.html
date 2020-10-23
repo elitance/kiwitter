@@ -4,8 +4,8 @@
         <title>${t}</title>
         <meta charset=UTF-8">
         <link rel="stylesheet" href="/css/pref.css">
-        <link rel="shortcut icon" href="/img/favicon.ico">
-        <link rel="icon" href="/img/favicon.ico">
+        <link rel="shortcut icon" href="/img/favicon.svg">
+        <link rel="icon" href="/img/favicon.svg">
     </head>
     <body>
         <div class="root">
@@ -15,15 +15,19 @@
                 </a>
                 <div class="menu">
                     <div class="bar"></div>
-                    <a id="account" class="pref-menu current">Account</a>
-                    <a id="security" class="pref-menu">Security</a>
-                    <a id="notifications" class="pref-menu">Notifications</a>
-                    <a id="display" class="pref-menu">Display</a>
+                    <a id="account" href="#account" class="pref-menu current">Account</a>
+                    <a id="security" href="#security" class="pref-menu">Security</a>
+                    <a id="notifications" href="#notifications" class="pref-menu">Notifications</a>
+                    <a id="display" href="#display" class="pref-menu">Display</a>
                 </div>
                 <button class="unfill signout">Sign Out</button>
                 <a href="/preferences" class="button-unfill">Preferences</a>
             </div>
-            <main></main>
+            <main>
+                <div class="load">
+                    <img src="/img/oval.svg">
+                </div>
+            </main>
         </div>
         <script src="/js/pref.js"></script>
         <script src="/js/signout.js"></script>

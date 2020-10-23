@@ -4,17 +4,17 @@ const indicate = {
         follow.classList.remove('loading');
         follow.classList.remove('unfill');
         follow.classList.add('fill');
-        follow.innerText = 'Following';
+        follow.innerHTML = 'Following';
     },
     loading: () => {
         follow.classList.add('loading');
-        follow.innerText = 'Loading...';
+        follow.innerHTML = '<img src="/img/oval.svg">'
     },
     follow: () => {
         follow.classList.remove('loading');
         follow.classList.remove('fill');
         follow.classList.add('unfill');
-        follow.innerText = 'Follow';
+        follow.innerHTML = 'Follow';
     }
 }
 
