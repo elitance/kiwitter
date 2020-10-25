@@ -52,14 +52,24 @@ router.get('/signin', (req: any, res: express.Response) => {
 });
 
 router.post('/signin', (req: any, res: express.Response) => {
+   function signinSuccess(req: any, res: express.Response): void {
+      req.session.un = req.body.un;
+      req.session.pw = _.crypto(req.body.pw);
+      req.session.cookie.maxAge = 31536000000;
+      res.send(true);
+   }
+
    db.query('select * from account where un = ? and pw = ? and vrf = 1', [req.body.un, _.crypto(req.body.pw)], (err, account) => {
       if (!account[0]) {
-         res.send(false);
+         db.query('select * from account where email = ? and pw = ? and vrf = 1', [req.body.un, _.crypto(req.body.pw)], (err, account) => {
+            if (!account[0]) {
+               res.send(false);
+            } else {
+               signinSuccess(req, res);
+            }
+         });
       } else {
-         req.session.un = req.body.un;
-         req.session.pw = _.crypto(req.body.pw);
-         req.session.cookie.maxAge = 31536000000;
-         res.send(true);
+         signinSuccess(req, res);
       }
    });
 });
