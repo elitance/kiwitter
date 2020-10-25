@@ -50,28 +50,28 @@ app.put('/:username/follow', (req: any, res: express.Response) => {
          const query: any = url.parse(req.url, true).query;
          let following: boolean = false;
 
-         if (account[0].followers) {
-            account[0].followers.split(', ').forEach((id: string) => {
+         if (account[0].fwr) {
+            account[0].fwr.split(', ').forEach((id: string) => {
                if (id === myAccount[0].id.toString()) following = true;
             });
          } 
 
          if (query.do === 'follow' && !following) {
-            if (!account[0].followers) {
-               db.query('update account set followers = ? where un = ?', [myAccount[0].id, account[0].un], (err, acc) => {
+            if (!account[0].fwr) {
+               db.query('update account set fwr = ? where un = ?', [myAccount[0].id, account[0].un], (err, acc) => {
                   res.send();
                });
             } else {
-               db.query('update account set followers = ? where un = ?', [`${account[0].followers}, ${myAccount[0].id}`, account[0].un], (err, acc) => {
+               db.query('update account set fwr = ? where un = ?', [`${account[0].fwr}, ${myAccount[0].id}`, account[0].un], (err, acc) => {
                   res.send();
                });
             }
          } else if (query.do === 'unfollow' && following) {
-            let followers: string = '';
-            account[0].followers.split(', ').forEach((id: string) => {
-               if (id !== myAccount[0].id.toString()) followers += `, ${id}`;
+            let fwr: string = '';
+            account[0].fwr.split(', ').forEach((id: string) => {
+               if (id !== myAccount[0].id.toString()) fwr += `, ${id}`;
             });
-            db.query('update account set followers = ? where un = ?', [followers.slice(2), account[0].un], (err, acc) => {
+            db.query('update account set fwr = ? where un = ?', [fwr.slice(2), account[0].un], (err, acc) => {
                res.send();
             });
          } else if (query.do === 'check') {
