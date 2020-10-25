@@ -65,8 +65,21 @@ main {
    flex-basis: 80%;
 }
 
-main h1 {
+main h1, main h2, main h3 {
    margin: 5px 0 15px 0;
-   padding: 0 0 5px 5px;
+   padding: 5px;
    border-bottom: 4px solid rgba(29, 161, 242, .5);
+}
+
+main h2, main h3 {
+   display: inline-block;
+   border-bottom: none;
+}
+
+main h2 {
+   font-size: 25px;
+}
+
+main h3 {
+   font-size: 22px;
 }

@@ -52,3 +52,7 @@ a.pref-menu.current {
     margin-right: 5px;
     transition: height .15s, margin-top .15s;
 }
+
+form .input {
+    margin-top: 20px;
+}

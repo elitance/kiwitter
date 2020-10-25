@@ -48,6 +48,7 @@ button:focus, a:focus {
    flex-direction: column;
    justify-content: flex-end;
    align-self: flex-end;
+   flex-direction: column-reverse;
 }
 
 .input input {
@@ -56,9 +57,9 @@ button:focus, a:focus {
    border: none;
    width: 320px;
    background: none;
-   border-bottom: 1.5px solid #757575;
-   border-radius: 0;
+   border-bottom: 1.8px solid #757575;
    font-size: 18px;
+   transition: border-bottom-color .2s;
 }
 
 .input label {
@@ -66,30 +67,20 @@ button:focus, a:focus {
    color: #999;
    font-size: 18px;
    pointer-events: none;
-   user-select: none;
    transition: margin .2s, font-size .2s, color .2s;
 }
 
-.input .bar {
-   width: 0;
-   margin-top: -2px;  
-   height: 2.5px;
-   background: #1da1f2;
-   border-radius: 2px;
-   transition: width .4s;
+.input input:focus {
+   border-bottom-color: #1da1f2;
 }
 
-label.focus {
-   color: #1da1f2;
-}
-
-label.focus, label.valid {
+.input input:focus ~ label, .input input:valid ~ label {
    margin: 0 0 3px 0;
    font-size: 14px;
 }
 
-.input input:focus ~ .bar {
-   width: 320px;
+.input input:focus ~ label {
+   color: #1da1f2;
 }
 
 .input i {
