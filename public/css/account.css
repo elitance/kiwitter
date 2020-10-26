@@ -4,14 +4,14 @@ body {
    display: flex;
    height: 100vh;
    align-items: center;
-   background: #71c9f8;
+   background: rgb(76, 224, 123);
    overflow: hidden;
 }
 
 img {
    margin-left: -5%;
    height: 150%;
-   filter: invert(57%) sepia(55%) saturate(3137%) hue-rotate(175deg) brightness(95%) contrast(99%);
+   filter: invert(62%) sepia(32%) saturate(948%) hue-rotate(93deg) brightness(101%) contrast(85%);
 }
 
 form {
