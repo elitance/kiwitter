@@ -31,12 +31,12 @@ a.pref-menu {
 }
 
 a.pref-menu.current {
-    color: #1da1f2;
+    color: #2ecc71;
 }
 
 .sidebar .menu .bar {
     position: absolute;
-    background: #1da1f2;
+    background: #2ecc71;
     width: 2px;
     height: 18px;
     border-radius: 1px;

@@ -32,7 +32,7 @@ i {
 }
 
 button:focus, a:focus {
-   box-shadow: 0 0 0 4px #1da1f24d;
+   box-shadow: 0 0 0 4px #2ecc714d;
 }
 
 .input {
@@ -71,7 +71,7 @@ button:focus, a:focus {
 }
 
 .input input:focus {
-   border-bottom-color: #1da1f2;
+   border-bottom-color: #2ecc71;
 }
 
 .input input:focus ~ label, .input input:valid ~ label {
@@ -80,7 +80,7 @@ button:focus, a:focus {
 }
 
 .input input:focus ~ label {
-   color: #1da1f2;
+   color: #2ecc71;
 }
 
 .input i {
@@ -123,19 +123,19 @@ button > img {
 }
 
 button.fill.loading {
-   background: #1da1f266;
+   background: #2ecc714d;
    pointer-events: none;
 }
 
 button.unfill, a.button-unfill {
-   border: 1.5px solid #1da1f2;
+   border: 1.5px solid #2ecc71;
    background: none;
-   color: #1da1f2;
+   color: #2ecc71;
 }
 
 button.fill, a.button-fill {
    border: none;
-   background: #1da1f2;
+   background: #2ecc71;
    color: white;
 }
 
@@ -144,15 +144,15 @@ button.fill i {
 }
 
 button.unfill:hover, a.button-unfill:hover {
-   background: rgba(29, 161, 242, .2);
+   background: #2ecc7133;
 }
 
 button.fill:hover, a.button-fill:hover {
-   background: #1a91da;
+   background: #2bbc59;
 }
 
 a.text {
-   color: #1da1f2;
+   color: #2ecc71;
    box-shadow: none !important;
 }
 
@@ -174,8 +174,8 @@ a.link-menu {
 }
 
 a.link-menu:hover {
-   color: #1da1f2;
-   background: rgba(29, 161, 242, .2);
+   color: #2bbc59;
+   background: #2ecc7133;
 }
 
 span.addit {

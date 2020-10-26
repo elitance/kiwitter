@@ -4,6 +4,7 @@ body {
    height: 100vh;
    display: flex;
    justify-content: center;
+   background: #fafbfc;
 }
 
 .root {
@@ -16,7 +17,6 @@ body {
    padding: 15px;
    border-left: none;
    flex-basis: 20%;
-   background: white;
    border-right: 1px solid gray;
 }
 
@@ -32,7 +32,7 @@ body {
 
 .sidebar img {
    width: 60%;
-   filter: invert(57%) sepia(55%) saturate(3137%) hue-rotate(175deg) brightness(95%) contrast(99%);
+   filter: invert(62%) sepia(32%) saturate(948%) hue-rotate(93deg) brightness(101%) contrast(85%);
 }
 
 .sidebar .menu {
@@ -68,7 +68,7 @@ main {
 main h1, main h2, main h3 {
    margin: 5px 0 15px 0;
    padding: 5px;
-   border-bottom: 4px solid rgba(29, 161, 242, .5);
+   border-bottom: 4px solid #2ecc7180;
 }
 
 main h2, main h3 {
