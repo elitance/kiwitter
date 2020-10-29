@@ -9,7 +9,7 @@ interface TemplateOption {
    repArr?: string[];
 }
 
-type Request = express.Request | any;
+// type ClientRequest = express.Request | any;
 
 export = {
    html: {
@@ -55,8 +55,5 @@ export = {
    },
    loginCheck: (req: any, res: express.Response): void => {
       if (!req.session.un) res.redirect('/account/login');
-   },
-   types: {
-      Request,
    }
 }
