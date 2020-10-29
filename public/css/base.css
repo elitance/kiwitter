@@ -32,7 +32,6 @@ body {
 
 .sidebar img {
    width: 60%;
-   filter: invert(62%) sepia(32%) saturate(948%) hue-rotate(93deg) brightness(101%) contrast(85%);
 }
 
 .sidebar .menu {
@@ -68,7 +67,7 @@ main {
 main h1, main h2, main h3 {
    margin: 5px 0 15px 0;
    padding: 5px;
-   border-bottom: 4px solid #2ecc7180;
+   border-bottom: 4px solid var(--main-color-exp-tpt);
 }
 
 main h2, main h3 {

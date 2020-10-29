@@ -2,6 +2,24 @@ const prefCats = document.querySelectorAll('a.pref-menu');
 const catsArr = [...prefCats];
 const mtArr = ['16px', '72px', '125px', '182px'];
 
+function loadHTML(hash) {
+    fetch(`/html/${hash.slice(1)}.html`).then(async(resp) => {
+        const load = document.querySelector('.load');
+        const main = document.querySelector('main > .content');
+        if (load.classList.contains('hidden')) {
+            load.classList.remove('hidden');
+            main.innerHTML = '';
+        }
+
+        const html = await resp.text();
+        
+        if (!html.includes('Not Found')) {
+            load.classList.add('hidden');
+            main.innerHTML = html;
+        }
+    });
+}
+
 if (location.hash) {
     const hashElt = document.querySelector(location.hash);
     document.querySelector('.current').classList.remove('current');
@@ -11,11 +29,7 @@ if (location.hash) {
     location.hash = 'account';
 }
 
-fetch(`/html/${location.hash.slice(1)}.html`).then(async(resp) => {
-    const html = await resp.text();
-    document.querySelector('.load').classList.add('hidden');
-    document.querySelector('main').innerHTML = html;
-});
+loadHTML(location.hash);
 
 prefCats.forEach((prefCat) => {
     prefCat.addEventListener('click', (e) => {
@@ -26,5 +40,14 @@ prefCats.forEach((prefCat) => {
         
         current.classList.remove('current');
         e.target.classList.add('current');
+
+        loadHTML(e.target.hash);
     });
 });
+
+if (document.querySelector('#chun')) document.querySelector('#chun').addEventListener('submit', (e) => {
+    fetch('/preferences?ch=un', { method: 'POST' }).then(async(resp) => {
+        await resp.json();
+
+    })
+})

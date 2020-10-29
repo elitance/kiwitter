@@ -14,7 +14,7 @@ div.pf {
     height: 150px;
     width: 150px;
     border-radius: 75px;
-    background: #2bbc59 url('/img/user.svg') no-repeat center !important; 
+    background: var(--main-color-drk) url('/img/user.svg') no-repeat center !important; 
     background-size: 80px !important;
     border: 4px solid white;
 }

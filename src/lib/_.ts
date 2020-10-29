@@ -9,6 +9,8 @@ interface TemplateOption {
    repArr?: string[];
 }
 
+type Request = express.Request | any;
+
 export = {
    html: {
       part: (file: string, repArr?: string[]): string => {
@@ -37,7 +39,7 @@ export = {
          } else {
             result = base;
          }
-
+   
          if (options.res) {
             options.res.send(result);
          } else {
@@ -53,5 +55,8 @@ export = {
    },
    loginCheck: (req: any, res: express.Response): void => {
       if (!req.session.un) res.redirect('/account/login');
+   },
+   types: {
+      Request,
    }
-};
+}

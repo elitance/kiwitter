@@ -64,7 +64,6 @@ form.addEventListener('submit', (e) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
     }).then(async(response) => {
-
         const result = await response.json();
 
         if (isSigninPage) {

@@ -1,4 +1,4 @@
-@import url('index.css');
+@import url('base.css');
 
 .load {
     display: flex;
@@ -6,6 +6,10 @@
     align-items: center;
     justify-content: center;
     transition: filter .2s;
+}
+
+.load.hidden {
+    height: 0;
 }
 
 .sidebar .menu {
@@ -31,23 +35,15 @@ a.pref-menu {
 }
 
 a.pref-menu.current {
-    color: #2ecc71;
+    color: var(--main-color);
 }
 
 .sidebar .menu .bar {
     position: absolute;
-    background: #2ecc71;
+    background: var(--main-color);
     width: 2px;
     height: 18px;
     border-radius: 1px;
-    /*
-
-    dist 1: 16px
-    dist 2: dist1 + 57
-    dist 3: dist2 + 57
-    dist 4: dist3 + 57
-    
-    */
     margin-top: 16px;
     margin-right: 5px;
     transition: height .15s, margin-top .15s;

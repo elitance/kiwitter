@@ -9,6 +9,7 @@ import pref = require('./router/pref');
 import db = require('./lib/mysql');
 
 const app: express.Application = express();
+type ServerRequest = express.Request | any;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -19,19 +20,19 @@ app.use(express.static('public'));
 app.use('/account', account);
 app.use('/preferences', pref);
 
-app.get('*', (req: any, res: express.Response, next: express.NextFunction) => {
+app.get('*', (req: ServerRequest, res: express.Response, next: express.NextFunction) => {
    !req.session.un ? res.redirect('/account/signin') : next();
 });
 
-app.get('/', (req: express.Request, res: express.Response) => {
+app.get('/', (req: ServerRequest, res: express.Response) => {
    _.html.send('base', { title: 'Kiwitter', res, part: 'home', repArr: ['Home'] });
 });
 
-app.get('/profile', (req: any, res: express.Response) => {
+app.get('/profile', (req: ServerRequest, res: express.Response) => {
    res.redirect(`/${req.session.un}`);
 });
 
-app.get('/:username', (req: any, res: express.Response) => {
+app.get('/:username', (req: ServerRequest, res: express.Response) => {
    db.query('select * from account where un = ?', [req.params.username], (err, account) => {
       if (account[0]) {
          const name: string = `${account[0].fn} ${account[0].ln}`;
@@ -44,7 +45,7 @@ app.get('/:username', (req: any, res: express.Response) => {
    });
 });
 
-app.put('/:username/follow', (req: any, res: express.Response) => {
+app.put('/:username/follow', (req: ServerRequest, res: express.Response) => {
    db.query('select * from account where un = ?', [req.session.un], (err, myAccount) => {
       db.query('select * from account where un = ?', [req.params.username], (err, account) => {
          const query: any = url.parse(req.url, true).query;
@@ -81,7 +82,7 @@ app.put('/:username/follow', (req: any, res: express.Response) => {
    });
 });
 
-app.use((req: express.Request, res: express.Response) => {
+app.use((req: ServerRequest, res: express.Response) => {
    _.html.notFound(res);
 });
 

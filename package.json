@@ -10,9 +10,7 @@
       "start": "pm2 start dist/app.js --watch"
    },
    "devDependencies": {},
-   "peerDependencies": {
-      "typescript": "^4.0.3"
-   },
+   "peerDependencies": {},
    "dependencies": {
       "@types/compression": "^1.7.0",
       "@types/express": "^4.17.8",
