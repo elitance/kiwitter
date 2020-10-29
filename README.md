@@ -29,8 +29,8 @@ No way to view it. Just a private project for myself. I may offer some previews.
 
 ### Preview Images
 
-![Preview 1](doc/assets/preview1.png)
-![Preview 2](doc/assets/preview2.png)
-![Preview 3](doc/assets/preview3.png)
-![Preview 4](doc/assets/preview4.png)
-![Preview 5](doc/assets/preview5.png)
+![Preview 1](doc/preview1.png)
+![Preview 2](doc/preview2.png)
+![Preview 3](doc/preview3.png)
+![Preview 4](doc/preview4.png)
+![Preview 5](doc/preview5.png)
