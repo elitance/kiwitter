@@ -1,12 +1,11 @@
 import express = require('express');
 import url = require('url');
 import db = require('../lib/mysql');
-import _ = require('../lib/_');
 import mail = require('../lib/mail');
+import _ = require('../lib/_');
 
 const router: express.IRouter = express.Router();
 
-type ServerRequest = express.Request | any;
 class Account {
    private un: string;
    private pw: string;
@@ -44,19 +43,21 @@ class Account {
    }
 }
 
-router.get('/signin', (req: ServerRequest, res: express.Response) => {
-   if (req.session.un) {
+router.get('/signin', (req: express.Request, res: express.Response) => {
+   if (req.session?.un) {
       res.redirect('/');
    } else {
       _.html.send('account', { title: 'Sign In', part: 'signin', res });
    }
 });
 
-router.post('/signin', (req: ServerRequest, res: express.Response) => {
-   function signinSuccess(req: ServerRequest, res: express.Response): void {
-      req.session.un = req.body.un;
-      req.session.pw = _.crypto(req.body.pw);
-      req.session.cookie.maxAge = 31536000000;
+router.post('/signin', (req: express.Request, res: express.Response) => {
+   function signinSuccess(req: express.Request, res: express.Response): void {
+      if (req.session) {
+         req.session.un = req.body.un;
+         req.session.pw = _.crypto(req.body.pw);
+         req.session.cookie.maxAge = 31536000000;
+      }
       res.send(true);
    }
 
@@ -75,21 +76,21 @@ router.post('/signin', (req: ServerRequest, res: express.Response) => {
    });
 });
 
-router.get('/signup', (req: ServerRequest, res: express.Response) => {
-   if (req.session.un) {
+router.get('/signup', (req: express.Request, res: express.Response) => {
+   if (req.session?.un) {
       res.redirect('/');
    } else {
       _.html.send('account', { title: 'Sign Up', part: 'signup', res });
    }
 });
 
-router.post('/signup', async(req: ServerRequest, res: express.Response) => {
+router.post('/signup', async(req: express.Request, res: express.Response) => {
    const user: Account = new Account(req.body.un, req.body.pw, req.body.email, req.body.fn, req.body.ln);
    const available: boolean = await user.overlapCheck();
    res.send(available);
 });
 
-router.get('/verify', (req: ServerRequest, res: express.Response) => {
+router.get('/verify', (req: express.Request, res: express.Response) => {
    const query: any = url.parse(req.url, true).query;
    if (query.id) {
       db.query('update account set vrf = 1 where id = ?', [query.id], (err, account) => {
@@ -98,7 +99,7 @@ router.get('/verify', (req: ServerRequest, res: express.Response) => {
    }
 });
 
-router.delete('/signout', (req: ServerRequest, res: express.Response) => {
+router.delete('/signout', (req: express.Request, res: express.Response) => {
    req.session?.destroy((err: Error) => {
       if (err) throw err;
       res.send()

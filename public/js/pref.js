@@ -1,4 +1,5 @@
 const prefCats = document.querySelectorAll('a.pref-menu');
+const changeUn = document.querySelector('#chun');
 const catsArr = [...prefCats];
 const mtArr = ['16px', '72px', '125px', '182px'];
 
@@ -45,9 +46,15 @@ prefCats.forEach((prefCat) => {
     });
 });
 
-if (document.querySelector('#chun')) document.querySelector('#chun').addEventListener('submit', (e) => {
-    fetch('/preferences?ch=un', { method: 'POST' }).then(async(resp) => {
-        await resp.json();
+if (changeUn) changeUn.addEventListener('submit', (e) => {
+    fetch('/preferences', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ch: 'un', val: document.querySelector('#chun input[type=text]').value })
+    }).then(async(resp) => {
+        const success = await resp.json();
+        if (success) {
 
-    })
-})
+        }
+    });
+});

@@ -5,17 +5,20 @@ import _ = require('../lib/_');
 
 const router: express.IRouter = express.Router();
 
-router.get('/', (req: express.Request | any, res: express.Response) => {
-    const query: any = url.parse(req.url, true).query;
-    if (query.ch === 'un') {
-        db.query('select * from account where un = ?', [query.ch], (err, account) => {
-            if (!account[0]) {
-                db.query('update account set un = ? where un = ?', [query.ch, req.session.un])
-            }
-        })
-    }
+router.get('/', (req: express.Request, res: express.Response) => {
+    _.html.send('pref', { title: 'Preferences', repArr: [req.session?.un], res });
+});
 
-    _.html.send('pref', { title: 'Preferences', res });
+router.post('/', (req: express.Request, res: express.Response) => {
+    db.query('select * from account where ? = ?', [req.body.ch, req.body.val], (err, account) => {
+        if (!account[0]) {
+            db.query('update account set ? = ? where ? = ?', [req.body.ch, req.body.val, req.body.ch, req.session?.un], (err, account) => {
+                res.send(true);
+            });
+        } else {
+            res.send(false);
+        }
+    });
 });
 
 export = router;

@@ -9,8 +9,6 @@ interface TemplateOption {
    repArr?: string[];
 }
 
-// type ClientRequest = express.Request | any;
-
 export = {
    html: {
       part: (file: string, repArr?: string[]): string => {

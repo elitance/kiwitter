@@ -9,7 +9,6 @@ import pref = require('./router/pref');
 import db = require('./lib/mysql');
 
 const app: express.Application = express();
-type ServerRequest = express.Request | any;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,24 +19,24 @@ app.use(express.static('public'));
 app.use('/account', account);
 app.use('/preferences', pref);
 
-app.get('*', (req: ServerRequest, res: express.Response, next: express.NextFunction) => {
-   !req.session.un ? res.redirect('/account/signin') : next();
+app.get('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+   !req.session?.un ? res.redirect('/account/signin') : next();
 });
 
-app.get('/', (req: ServerRequest, res: express.Response) => {
+app.get('/', (req: express.Request, res: express.Response) => {
    _.html.send('base', { title: 'Kiwitter', res, part: 'home', repArr: ['Home'] });
 });
 
-app.get('/profile', (req: ServerRequest, res: express.Response) => {
-   res.redirect(`/${req.session.un}`);
+app.get('/profile', (req: express.Request, res: express.Response) => {
+   res.redirect(`/${req.session?.un}`);
 });
 
-app.get('/:username', (req: ServerRequest, res: express.Response) => {
+app.get('/:username', (req: express.Request, res: express.Response) => {
    db.query('select * from account where un = ?', [req.params.username], (err, account) => {
       if (account[0]) {
          const name: string = `${account[0].fn} ${account[0].ln}`;
          let button: string = 'follow';
-         if (req.params.username === req.session.un) button = 'accPrf';
+         if (req.params.username === req.session?.un) button = 'accPrf';
          _.html.send('base', { title: `${name} - @${req.params.username}`, part: 'profile', repArr: [name, req.params.username, button], res });
       } else {
          _.html.notFound(res);
@@ -45,8 +44,8 @@ app.get('/:username', (req: ServerRequest, res: express.Response) => {
    });
 });
 
-app.put('/:username/follow', (req: ServerRequest, res: express.Response) => {
-   db.query('select * from account where un = ?', [req.session.un], (err, myAccount) => {
+app.put('/:username/follow', (req: express.Request, res: express.Response) => {
+   db.query('select * from account where un = ?', [req.session?.un], (err, myAccount) => {
       db.query('select * from account where un = ?', [req.params.username], (err, account) => {
          const query: any = url.parse(req.url, true).query;
          let following: boolean = false;
@@ -82,7 +81,7 @@ app.put('/:username/follow', (req: ServerRequest, res: express.Response) => {
    });
 });
 
-app.use((req: ServerRequest, res: express.Response) => {
+app.use((req: express.Request, res: express.Response) => {
    _.html.notFound(res);
 });
 
