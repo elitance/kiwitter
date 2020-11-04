@@ -6,34 +6,42 @@ interface TemplateOption {
    title: string;
    part?: string;
    res?: express.Response;
-   repArr?: string[];
+   replace?: {
+      part?: string[],
+      base?: string[]
+   };
 }
 
 export = {
    html: {
-      part: (file: string, repArr?: string[]): string => {
-         let result: string = fs.readFileSync(`./html/part/${file}.html`, 'utf-8');
-         if (repArr) {
-            for (var i = 0; i < repArr.length; i++) {
-               var regex: string = '\\$\\{' + (i + 1).toString() + '\\}';
-               result = result.replace(new RegExp(regex, 'g'), repArr[i]);
+      replace: (str: string, replace?: string[]): string => {
+         if (replace) {
+            for (let i = 0; i < replace.length; i++) {
+               let regex: string = '\\$\\{' + (i + 1).toString() + '\\}';
+               str = str.replace(new RegExp(regex, 'g'), replace[i]);
             }
-            result = result.replace(/\$\{[0-9]\}/g, '');
+            str = str.replace(/\$\{[0-9]\}/g, '');
          }
-         return result;
+         return str;
+      },
+      part: function(file: string, repArr?: string[]): string {
+         let part: string = fs.readFileSync(`./html/part/${file}.html`, 'utf-8');
+         return this.replace(part, repArr);
       },
       send: function(page: string, options: TemplateOption): string | void {
          let base: string = fs.readFileSync(`./html/${page}.html`, 'utf-8').replace('${t}', options.title);
          let result: string;
-         if (options.part && !options.repArr) {
+         if (options.part && !options.replace) {
             const part: string = this.part(options.part);
             result = base.replace('${c}', part);
-         } else if (options.part && !options.repArr) {
-            const part: string = this.part(options.part);
+         } else if (options.part && options.replace) {
+            let part: string = '';
+            if (options.replace.base) base = this.replace(base, options.replace.base);
+            if (options.replace.part) part = this.part(options.part, options.replace.part);
             result = base.replace('${c}', part);
-         } else if (options.part && options.repArr) {
-            const part: string = this.part(options.part, options.repArr);
-            result = base.replace('${c}', part);
+         } else if (!options.part && options.replace) {
+            if (options.replace.base) base = this.replace(base, options.replace.base);
+            result = base;
          } else {
             result = base;
          }
@@ -45,8 +53,12 @@ export = {
          }
       },
       notFound: function(res: express.Response): void {
-         this.send('base', { title: 'Not Found', part: 'home', res, repArr: ['Not Found', 'The page you are looking for doesn\'t exist. Try again with different URL.'] });
-      }
+         this.send('base', {
+            title: 'Not Found',
+            part: 'home',
+            replace: { part: ['Not Found', 'The page you are looking for doesn\'t exist. Try again with different URL.'] }, res
+         });
+      },
    },
    crypto: (string: string): string => {
       return crypto.createHash('sha512').update(string).digest('base64');

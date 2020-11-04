@@ -6,7 +6,10 @@ import _ = require('../lib/_');
 const router: express.IRouter = express.Router();
 
 router.get('/', (req: express.Request, res: express.Response) => {
-    _.html.send('pref', { title: 'Preferences', repArr: [req.session?.un], res });
+    _.html.send('pref', {
+        title: 'Preferences',
+        replace: { part: [req.session?.un] }, res
+    });
 });
 
 router.post('/', (req: express.Request, res: express.Response) => {
@@ -20,7 +23,10 @@ router.post('/', (req: express.Request, res: express.Response) => {
 });
 
 router.post('/authorize', (req: express.Request, res: express.Response) => {
-    _.html.send('auth', { title: 'Authorize', res });
+    _.html.send('auth', {
+        title: 'Auorthize',
+        replace: { base: [JSON.stringify(req.body)] }, res
+    });
 });
 
 router.post('/authorize/check', (req: express.Request, res: express.Response) => {
@@ -31,4 +37,4 @@ router.post('/authorize/check', (req: express.Request, res: express.Response) =>
     }
 });
 
-export = router;
+export = router;_.html.replace('hello')

@@ -24,7 +24,11 @@ app.get('*', (req: express.Request, res: express.Response, next: express.NextFun
 });
 
 app.get('/', (req: express.Request, res: express.Response) => {
-   _.html.send('base', { title: 'Kiwitter', res, part: 'home', repArr: ['Home'] });
+   _.html.send('base', {
+      title: 'Kiwitter',
+      part: 'home',
+      replace: { part: ['Home'] }, res
+   });
 });
 
 app.get('/profile', (req: express.Request, res: express.Response) => {
@@ -37,7 +41,11 @@ app.get('/:username', (req: express.Request, res: express.Response) => {
          const name: string = `${account[0].fn} ${account[0].ln}`;
          let button: string = 'follow';
          if (req.params.username === req.session?.un) button = 'accPrf';
-         _.html.send('base', { title: `${name} - @${req.params.username}`, part: 'profile', repArr: [name, req.params.username, button], res });
+         _.html.send('base', {
+            title: `${name} - @${req.params.username}`,
+            part: 'profile',
+            replace: { part: [name, req.params.username, button] }, res
+         });
       } else {
          _.html.notFound(res);
       }
