@@ -10,6 +10,7 @@ Kiwitter: Clone of Twitter
 - HTML / CSS / JS
 - Node.js
 - Express
+- ~~Passport~~
 
 ### Dependencies
 
