@@ -47,7 +47,6 @@ button:focus, a:focus {
 
 .input .input-inner {
    display: flex;
-   flex-direction: column;
    justify-content: flex-end;
    align-self: flex-end;
    flex-direction: column-reverse;
