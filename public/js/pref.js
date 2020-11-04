@@ -2,7 +2,6 @@ const prefCats = document.querySelectorAll('a.pref-menu');
 const changeUn = document.querySelector('#chun');
 const catsArr = [...prefCats];
 const mtArr = ['16px', '72px', '125px', '182px'];
-const stat = document.querySelector('.addit.fail');
 
 const msg = {
     fail: {
@@ -20,6 +19,7 @@ const regex = {
 };
 
 function showStat(msg) {
+    const stat = document.querySelector('span.addit');
     stat.classList.add('hidden');
     stat.innerHTML = msg;
     setTimeout(() => { stat.classList.remove('hidden') }, 250);

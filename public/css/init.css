@@ -29,12 +29,13 @@ i {
    font-style: normal;
 }
 
-::-webkit-scrollbar {
-   width: 0;
+button:focus, a:focus {
+   box-shadow: 0 0 0 4px var(--main-color-trnp);
 }
 
-button:focus, a:focus {
-   box-shadow: 0 0 0 4px var(--main-color-ext-tpt);
+.logo {
+   pointer-events: none;
+   height: 40px;
 }
 
 .input {
@@ -124,7 +125,7 @@ button > img {
 }
 
 button.fill.loading {
-   background: var(--main-color-tpt);
+   background: var(--main-color-extra-trnp);
    pointer-events: none;
 }
 
@@ -145,7 +146,7 @@ button.fill i {
 }
 
 button.unfill:hover, a.button-unfill:hover {
-   background: var(--main-color-tpt);
+   background: var(--main-color-extra-trnp);
 }
 
 button.fill:hover, a.button-fill:hover {
@@ -165,18 +166,22 @@ a.button-fill, a.button-unfill, a.link-menu {
    display: flex;
    align-items: center;
    justify-content: center;
-   transition: background .2s, color .2s, box-shadow .2s;
 }
 
 a.link-menu {
    font-size: 18px;
    font-weight: 600;
    padding: 0 25px 0 25px;
+   transition: background .2s, color .2s, box-shadow .2s;
 }
 
 a.link-menu:hover {
    color: var(--main-color-drk);
-   background: var(--main-color-tpt);
+   background: var(--main-color-extra-trnp);
+}
+
+a.link-menu:focus {
+   box-shadow: 0 0 0 4px var(--main-color-trnp);
 }
 
 span.addit {
@@ -188,11 +193,44 @@ span.addit {
    transition: filter .2s;
 }
 
+.alert {
+   position: absolute;
+   top: -70px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 500px;
+   height: 50px;
+   background: #ffffff99;
+   border: 1.5px solid white;
+   backdrop-filter: blur(6px);
+   border-radius: 5px;
+   transition: top .3s;
+}
+
+.alert.fail, .alert.success {
+   color: white;
+}
+
+.alert.success {
+   background: #2ea44f99;
+   border-color: #2ea44f;
+}
+
+.alert.fail {
+   background: #cb243199;
+   border-color: #cb2431;
+}
+
+.alert.shown {
+   top: 15px;
+}
+
 .hidden {
    filter: opacity(0);
 }
 
-span.addit i {
+span.addit i, .alert i {
    margin-right: 5px;
    font-style: normal;
 }

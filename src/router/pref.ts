@@ -20,11 +20,15 @@ router.post('/', (req: express.Request, res: express.Response) => {
 });
 
 router.post('/authorize', (req: express.Request, res: express.Response) => {
-    res.send(req.body);
-    // if (req.body.ch === 'un') {
-    //     db.query('select * from account where ? = ')
-    // }
-    // db.query('select * from account where ? = ?', [req.body.ch])
+    _.html.send('auth', { title: 'Authorize', res });
+});
+
+router.post('/authorize/check', (req: express.Request, res: express.Response) => {
+    if (_.crypto(req.body.pw) === req.session?.pw) {
+        res.send(true);
+    } else {
+        res.send(false);
+    }
 });
 
 export = router;

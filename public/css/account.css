@@ -11,7 +11,6 @@ body {
 img {
    margin-left: -5%;
    height: 150%;
-   pointer-events: none;
 }
 
 form {

@@ -10,9 +10,22 @@
     </head>
     <body>
         <div class="root">
+            <div class="alert"></div>
             <div class="auth">
-                <form action=""></form>
+                <img src="/img/twitter.svg" class="logo">
+                <form>
+                    <h1>Authorize</h1>
+                    <span class="addit">To secure your account,<br>you have to verify that it's you.</span>
+                    <div class="input box">
+                        <div class="input-inner">
+                            <input type="password" name="pw" required>
+                            <label>Password</label>
+                        </div>
+                    </div>
+                </form>
+                <span class="addit"><a href="/account/recover" class="text">Forgot your password?</a></span>
             </div>
         </div>
+        <script src="/js/auth.js"></script>
     </body>
 </html>

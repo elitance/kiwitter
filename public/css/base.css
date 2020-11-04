@@ -67,7 +67,7 @@ main {
 main h1, main h2, main h3 {
    margin: 5px 0 15px 0;
    padding: 5px;
-   border-bottom: 4px solid var(--main-color-ext-tpt);
+   border-bottom: 4px solid var(--main-color-trnp);
 }
 
 main h2, main h3 {
