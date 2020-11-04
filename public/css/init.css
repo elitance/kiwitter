@@ -34,7 +34,7 @@ i {
 }
 
 button:focus, a:focus {
-   box-shadow: 0 0 0 4px var(--main-color-exp-tpt);
+   box-shadow: 0 0 0 4px var(--main-color-ext-tpt);
 }
 
 .input {
