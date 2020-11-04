@@ -10,15 +10,21 @@ router.get('/', (req: express.Request, res: express.Response) => {
 });
 
 router.post('/', (req: express.Request, res: express.Response) => {
-    db.query('select * from account where ? = ?', [req.body.ch, req.body.val], (err, account) => {
+    db.query('select * from account where un = ?', [req.body.val], (err, account) => {
         if (!account[0]) {
-            db.query('update account set ? = ? where ? = ?', [req.body.ch, req.body.val, req.body.ch, req.session?.un], (err, account) => {
-                res.send(true);
-            });
+            res.send(true);
         } else {
             res.send(false);
         }
     });
+});
+
+router.post('/authorize', (req: express.Request, res: express.Response) => {
+    res.send(req.body);
+    // if (req.body.ch === 'un') {
+    //     db.query('select * from account where ? = ')
+    // }
+    // db.query('select * from account where ? = ?', [req.body.ch])
 });
 
 export = router;

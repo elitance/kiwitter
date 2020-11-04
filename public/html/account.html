@@ -1,7 +1,8 @@
 <h1>Account</h1>
-<form method="post" id="chun">
+<form action="/preferences/authorize" method="post">
     <h3>Change Username</h3>
     <span class="addit fail hidden"></span>
+    <input type="hidden" name="ch" value="un">
     <div class="input">
         <div class="input-inner">
             <input type="text" name="un" required>
@@ -11,4 +12,22 @@
         <div class="details">Length should be over 6 and under 30.<br>Can include number, character, dash and underscore.</div>
     </div>
     <button class="fill">Save Changes</button>
+</form>
+<form action="/preferences/authorize" method="POST">
+    <h3>Change Name</h3>
+    <input type="hidden" name="ch" value="nm">
+    <div class="input">
+        <div class="input-inner">
+            <input type="text" name="fn">
+            <label>First Name</label>
+        </div>
+        <i></i>
+        <div class="details">Please exclude your middle name.</div>
+    </div>
+    <div class="class input">
+        <div class="input-inner">
+            <input type="text" name="ln">
+            <label>Last Name</label>
+        </div>
+    </div>
 </form>
