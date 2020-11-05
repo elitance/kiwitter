@@ -1,6 +1,5 @@
 import * as sqlSession from 'express-session';
 import session = require('express-session');
-import express = require('express');
 import mysqlSession = require('express-mysql-session');
 import fs = require('fs');
 
@@ -12,6 +11,7 @@ export = () => {
       secret: profile.session.secret,
       resave: false,
       saveUninitialized: true,
+      cookie: { sameSite: 'strict' },
       store: new MySQLStore({
          host: 'localhost',
          user: profile.mysql.user,
@@ -19,4 +19,4 @@ export = () => {
          database: 'kiwitter',
       })
    });
-};
+}

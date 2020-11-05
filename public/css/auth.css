@@ -23,6 +23,7 @@
 
 .auth img.logo {
     margin-bottom: 15px;
+    height: 40px;
 }
 
 .auth form {
@@ -37,4 +38,8 @@
 
 .auth form span {
     text-align: center;
+}
+
+.auth .input {
+    margin: 40px 0 20px 0;
 }

@@ -8,7 +8,6 @@
    font-family: -apple-system, BlinkMacSystemFont, Inter, Noto Sans KR;
    box-sizing: border-box;
    outline: none;
-   user-select: none;
 }
 
 body {
@@ -35,36 +34,42 @@ button:focus, a:focus {
 
 .logo {
    pointer-events: none;
-   height: 40px;
+   user-select: none;
 }
 
 .input {
    display: flex;
+   align-items: center;
+}
+
+.input.open {
    height: 50px;
    margin: 40px 0 40px 0;
-   align-items: center;
    transition: filter .2s;
 }
 
-.input .input-inner {
+.input.open .input-inner {
    display: flex;
    justify-content: flex-end;
    align-self: flex-end;
    flex-direction: column-reverse;
 }
 
-.input input {
+.input.open input, input.box {
    display: block;
-   padding: 0 10px 5px 5px;
-   border: none;
    width: 320px;
+   font-size: 18px;
+   border: none;
+}
+
+.input.open input {
+   padding: 0 10px 5px 5px;
    background: none;
    border-bottom: 1.8px solid #757575;
-   font-size: 18px;
    transition: border-bottom-color .2s;
 }
 
-.input label {
+.input.open label {
    margin: 0 0 -22.5px 5px;
    color: #999;
    font-size: 18px;
@@ -72,17 +77,48 @@ button:focus, a:focus {
    transition: margin .2s, font-size .2s, color .2s;
 }
 
-.input input:focus {
+.input.open input:focus {
    border-bottom-color: var(--main-color);
 }
 
-.input input:focus ~ label, .input input:valid ~ label {
+.input.open input:focus ~ label, .input.open input:valid ~ label {
    margin: 0 0 3px 0;
    font-size: 14px;
 }
 
-.input input:focus ~ label {
+.input.open input:focus ~ label {
    color: var(--main-color);
+}
+
+input.box {
+   padding: 10px;
+   background: #fafbfc;
+   box-shadow: 0 2px 5px rgba(0,0,0,.3);
+   border-radius: 5px;
+   height: 42px;
+   transition: box-shadow .3s;
+}
+
+input.box ~ button[type=submit] {
+   border: none;
+   width: 42px;
+   height: 42px;
+   margin: 0 10px 0 10px;
+   color: white;
+   background: var(--main-color);
+   border-radius: 21px;
+   font-size: 17px;
+   box-shadow: 0 2px 5px var(--main-color-trnp);
+   cursor: pointer;
+   transition: background .2s;
+}
+
+input.box:focus {
+   box-shadow: 0 4px 5px rgba(0,0,0,.3);
+}
+
+input.box ~ button[type=submit]:hover {
+   background: var(--main-color-drk);
 }
 
 .input i {
@@ -241,8 +277,4 @@ span.fail {
 
 span.success {
    color: #2ea44f;
-}
-
-.tweet {
-   user-select: initial;
 }

@@ -13,15 +13,14 @@
             <div class="alert"></div>
             <div class="auth">
                 <img src="/img/twitter.svg" class="logo">
-                <form>
-                    <input type="hidden" name="body" value="${1}">
+                <form action="/preferences/authorize/confirm" method="POST">
+                    <input type="hidden" name="ch" value="${1}">
+                    <input type="hidden" name="val" value="${2}">
                     <h1>Authorize</h1>
                     <span class="addit">To secure your account,<br>you have to verify that it's you.</span>
                     <div class="input box">
-                        <div class="input-inner">
-                            <input type="password" name="pw" required>
-                            <label>Password</label>
-                        </div>
+                        <input type="password" name="pw" placeholder="Password" class="box" required>
+                        <button type="submit">→</button>
                     </div>
                 </form>
                 <span class="addit"><a href="/account/recover" class="text">Forgot your password?</a></span>

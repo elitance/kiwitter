@@ -8,13 +8,13 @@ const msg = {
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log(JSON.parse(form.querySelector('input[type=hidden]').value));
-    fetch('/preferences/authorize/check', {
+    fetch('/preferences/authorize/confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             pw: form.querySelector('input[type=password]').value,
-            body: form.querySelector('input[type=hidden]').value
+            ch: form.querySelector('input[name=ch]').value,
+            val: form.querySelector('input[name=val]').value
         })
     }).then(async(resp) => {
         const pwIsCorrect = await resp.json();

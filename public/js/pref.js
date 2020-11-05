@@ -6,7 +6,7 @@ const mtArr = ['16px', '72px', '125px', '182px'];
 const msg = {
     fail: {
         format: '<i></i> Please keep the formats provided.',
-        already: '<i></i> Username with the same username already exists.'
+        already: '<i></i> User with the same username already exists.'
     },
     success: {
         un: '<i></i> Username successfully changed.'
@@ -45,16 +45,16 @@ function loadHTML(hash) {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const ch = form.querySelector('input[type=hidden]').value;
-                const val = form.querySelectorAll('input:not([type=hidden])');
+                const val = form.querySelector('input[name=val]').value;
                 
-                if ((ch === 'un' && !regex.un.test(val[0].value)) || (ch === 'nm' && (!regex.nm.test(val[0].value) || !regex.nm.test(val[1].value)))) {
+                if ((ch === 'un' && !regex.un.test(val)) || (ch === 'nm' && (!regex.nm.test(val.split(' ')[0]) || !regex.nm.test(val.split(' ')[1])))) {
                     showStat(msg.fail.format);
                 } else {
                     if (ch === 'un') {
                         fetch('/preferences', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ val: val[0].value })
+                            body: JSON.stringify({ val })
                         }).then(async(resp) => {
                             const noOverlaps = await resp.json();
                             if (noOverlaps) {
