@@ -22,7 +22,7 @@ Just for practice
 
 ### License
 
-No license. Ignore the one at `package.json`.
+[MIT License](LICENSE).
 
 ## How to View It?
 
