@@ -108,6 +108,7 @@ input.box ~ button[type=submit] {
    background: var(--main-color);
    border-radius: 21px;
    font-size: 17px;
+   font-weight: 500;
    box-shadow: 0 2px 5px var(--main-color-trnp);
    cursor: pointer;
    transition: background .2s;
