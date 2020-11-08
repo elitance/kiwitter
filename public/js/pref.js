@@ -6,7 +6,8 @@ const mtArr = ['16px', '72px', '125px', '182px'];
 const msg = {
     fail: {
         format: '<i></i> Please keep the formats provided.',
-        already: '<i></i> User with the same username already exists.'
+        already: '<i></i> User with the same username already exists.',
+        retype: '<i></i> Two passwords are incorrect.'
     },
     success: {
         un: '<i></i> Username successfully changed.'
@@ -15,14 +16,15 @@ const msg = {
 
 const regex = {
     un: /^[a-zA-Z0-9]+([_-]?[a-zA-Z0-9])*$/,
-    nm: /^[a-zA-Z]+$/
+    nm: /^[a-zA-Z]+$/,
+    pw: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/gm
 };
 
 function showStat(msg) {
     const stat = document.querySelector('span.addit');
     stat.classList.add('hidden');
     stat.innerHTML = msg;
-    setTimeout(() => { stat.classList.remove('hidden') }, 250);
+    setTimeout(() => stat.classList.remove('hidden'), 300);
 }
 
 function loadHTML(hash) {
@@ -46,15 +48,15 @@ function loadHTML(hash) {
                 e.preventDefault();
                 const ch = form.querySelector('input[type=hidden]').value;
                 const val = form.querySelector('input[name=val]').value;
-                
-                if ((ch === 'un' && !regex.un.test(val)) || (ch === 'nm' && (!regex.nm.test(val.split(' ')[0]) || !regex.nm.test(val.split(' ')[1])))) {
+            
+                if (!regex[ch].test(val)) {
                     showStat(msg.fail.format);
                 } else {
                     if (ch === 'un') {
                         fetch('/preferences', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ val })
+                            body: JSON.stringify({ ch, val })
                         }).then(async(resp) => {
                             const noOverlaps = await resp.json();
                             if (noOverlaps) {
@@ -63,6 +65,9 @@ function loadHTML(hash) {
                                 showStat(msg.fail.already);
                             }
                         });
+                    } else if (ch === 'pw') {
+                        const pwArr = document.querySelectorAll('input[type=password]');
+                        pwArr[0].value === pwArr[1].value ? e.target.submit() : showStat(msg.fail.retype);
                     } else {
                         e.target.submit();
                     }

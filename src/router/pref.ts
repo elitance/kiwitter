@@ -21,14 +21,14 @@ router.post('/', (req: express.Request, res: express.Response) => {
     });
 });
 
-router.post('/authorize', (req: express.Request, res: express.Response) => {
+router.post('/authenticate', (req: express.Request, res: express.Response) => {
     _.html.send('auth', {
-        title: 'Authorize',
-        replace: { base: [req.body.ch, req.body.val] }, res
+        title: 'Authenticate',
+        replace: { base: [req.body.ch, (req.body.ch === 'pw' ? _.crypto(req.body.val) : req.body.val)] }, res
     });
 });
 
-router.post('/authorize/confirm', (req: express.Request, res: express.Response) => {
+router.post('/authenticate/confirm', (req: express.Request, res: express.Response) => {
     if (_.crypto(req.body.pw) === req.session?.pw) {
         let val: string | string[];
         if (req.body.ch === 'nm') {
@@ -39,7 +39,7 @@ router.post('/authorize/confirm', (req: express.Request, res: express.Response) 
                 });
             });
         } else {
-            val = req.body.ch === 'pw' ? _.crypto(req.body.val) : req.body.val;
+            val = req.body.val;
             db.query(`update account set ${req.body.ch} = ? where un = ?`, [val, req.session?.un], (err, account) => {
                 if (req.session) req.session[req.body.ch] = val;
                 res.send(true);

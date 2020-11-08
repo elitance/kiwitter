@@ -1,0 +1,15 @@
+<h1>Security</h1>
+<form action="/preferences/authenticate" method="POST">
+    <h3>Change Password</h3>
+    <span class="addit fail hidden"></span>
+    <input type="hidden" name="ch" value="pw">
+    <div class="input box">
+        <input type="password" name="val" placeholder="New Password" class="box" required>
+        <i></i>
+        <div class="details">Length should be over 8 and under 30.<br>One number, upper & lowercase required.</div>
+    </div>
+    <div class="input box">
+        <input type="password" placeholder="Retype New Password" class="box" required>
+        <button type="submit">→</button>
+    </div>
+</form>

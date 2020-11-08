@@ -96,14 +96,14 @@ input.box {
    box-shadow: 0 2px 5px rgba(0,0,0,.3);
    border-radius: 5px;
    height: 42px;
-   transition: box-shadow .3s;
+   transition: box-shadow .2s;
 }
 
 input.box ~ button[type=submit] {
    border: none;
    width: 42px;
    height: 42px;
-   margin: 0 10px 0 10px;
+   margin-left: 10px;
    color: white;
    background: var(--main-color);
    border-radius: 21px;
@@ -115,7 +115,7 @@ input.box ~ button[type=submit] {
 }
 
 input.box:focus {
-   box-shadow: 0 4px 5px rgba(0,0,0,.3);
+   box-shadow: 0 3px 5px rgba(0,0,0,.3);
 }
 
 input.box ~ button[type=submit]:hover {
@@ -123,6 +123,7 @@ input.box ~ button[type=submit]:hover {
 }
 
 .input i {
+   margin-left: 10px;
    font-size: 14px;
    cursor: help;
 }
@@ -226,8 +227,11 @@ span.addit {
    font-size: 15px;
    white-space: pre;
    margin: 15px 0 15px 0;
-   filter: opacity(1);
-   transition: filter .2s;
+   transition: filter .5s;
+}
+
+span.addit.hidden {
+   filter: opacity(0) blur(30px);
 }
 
 .alert {

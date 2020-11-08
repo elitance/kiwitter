@@ -4,13 +4,14 @@ body {
    display: flex;
    height: 100vh;
    align-items: center;
-   background: var(--main-color-drk);
+   background: var(--main-color-trnp);
    overflow: hidden;
 }
 
 img {
    margin-left: -5%;
    height: 150%;
+   filter: brightness(1.2);
 }
 
 form {

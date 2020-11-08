@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Authorize</title>
+        <title>Authenticate</title>
         <meta charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
         <link rel="stylesheet" href="/css/auth.css">
@@ -13,17 +13,16 @@
             <div class="alert"></div>
             <div class="auth">
                 <img src="/img/twitter.svg" class="logo">
-                <form action="/preferences/authorize/confirm" method="POST">
+                <form action="/preferences/authenticate/confirm" method="POST">
                     <input type="hidden" name="ch" value="${1}">
                     <input type="hidden" name="val" value="${2}">
-                    <h1>Authorize</h1>
+                    <h1>Authenticate</h1>
                     <span class="addit">To secure your account,<br>you have to verify that it's you.</span>
                     <div class="input box">
                         <input type="password" name="pw" placeholder="Password" class="box" required>
                         <button type="submit">→</button>
                     </div>
                 </form>
-                <span class="addit"><a href="/account/recover" class="text">Forgot your password?</a></span>
             </div>
         </div>
         <script src="/js/auth.js"></script>

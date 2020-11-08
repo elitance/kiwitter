@@ -26,4 +26,4 @@ Just for practice
 
 ## How to View It?
 
-No way to view it. Just a private project for myself. But here is preview screenshots: [`./docs`](docs).
+No way to view it. Just a private project for myself. I'll offer some  preview screenshots: [`docs`](docs).
