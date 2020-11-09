@@ -48,7 +48,7 @@ function loadHTML(hash) {
                 e.preventDefault();
                 const ch = form.querySelector('input[type=hidden]').value;
                 const val = form.querySelector('input[name=val]').value;
-            
+                
                 if (!regex[ch].test(val)) {
                     showStat(msg.fail.format);
                 } else {

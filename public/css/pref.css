@@ -31,16 +31,17 @@ a.pref-menu {
     font-size: 18px;
     box-shadow: none !important;
     cursor: pointer;
+    color: gray;
     transition: color .15s;
 }
 
 a.pref-menu.current {
-    color: var(--main-color);
+    color: black;
 }
 
 .sidebar .menu .bar {
     position: absolute;
-    background: var(--main-color);
+    background: var(--accent);
     width: 2px;
     height: 18px;
     border-radius: 1px;

@@ -1,6 +1,6 @@
 :root {
-    --main-color: #10ac84;
-    --main-color-drk: #0aa078;
-    --main-color-trnp: #10ac8480;
-    --main-color-extra-trnp: #10ac8433;
+    --accent: #10ac84;
+    --accent-drk: #0aa078;
+    --accent-trnp: #10ac8480;
+    --accent-extra-trnp: #10ac8433;
 }
