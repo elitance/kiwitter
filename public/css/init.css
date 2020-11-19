@@ -43,7 +43,7 @@ button:focus, a:focus {
    width: 320px;
    height: 50px;
    margin: 40px 0 40px 0;
-   transition: filter .2s;
+   transition: filter .2s, margin .2s;
 }
 
 .input.open input, input.box {
@@ -113,31 +113,27 @@ input.box ~ button[type=submit]:hover {
    background: var(--accent-drk);
 }
 
-.input .details {
-   display: flex;
-   justify-content: center;
+.input.open:hover > span.details {
+   animation: details-appear 2s;
+}
+
+.input.open span.details {
+   display: inline-flex;
+   height: 0;
+   align-items: center;
    margin-top: 10px;
-}
-
-.details i {
-   font-size: 14px;
-   cursor: help;
-}
-
-.details i:hover ~ span {
-   filter: opacity(1);
-}
-
-.details span {
-   display: inline-block;
-   margin-left: 10px;
    font-size: 14px;
    background: rgba(0,0,0,.7);
-   border-radius: 2px;
+   border-radius: 3px;
    color: white;
    filter: opacity(0);
-   padding: 5px;
+   padding: 6px;
    transition: filter .25s;
+}
+
+.input.open span.details i {
+   font-size: 12px;
+   margin-right: 5px;
 }
 
 button.unfill, button.fill, a.button-fill, a.button-unfill {
@@ -278,4 +274,22 @@ span.fail {
 
 span.success {
    color: #2ea44f;
+}
+
+@keyframes details-appear {
+   0% {
+      height: initial;
+   }
+
+   10% {
+      filter: opacity(1);
+   }
+
+   80% {
+      filter: opacity(0);
+   }
+
+   100% {
+      height: 0;
+   }
 }
