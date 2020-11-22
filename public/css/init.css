@@ -11,8 +11,10 @@
 }
 
 body {
+   height: 100vh;
    margin: 0;
    overflow: hidden;
+   background: var(--accent-bg);
 }
 
 a {
@@ -56,13 +58,13 @@ button:focus, a:focus {
 .input.open input {
    padding: 0 10px 5px 5px;
    background: none;
-   border-bottom: 1.8px solid #757575;
+   border-bottom: 1.8px solid var(--input-open-border);
    transition: border-bottom-color .2s;
 }
 
 .input.open label {
    margin: 0 0 -22.5px 5px;
-   color: #999;
+   color: var(--input-open-label);
    font-size: 18px;
    pointer-events: none;
    transition: margin .2s, font-size .2s, color .2s;
@@ -83,8 +85,8 @@ button:focus, a:focus {
 
 input.box {
    padding: 10px;
-   background: #fafbfc;
-   box-shadow: 0 2px 5px rgba(0,0,0,.3);
+   background: var(--accent-white);
+   box-shadow: 0 2px 5px var(--accent-bxsh);
    border-radius: 5px;
    height: 42px;
    transition: box-shadow .2s;
@@ -106,7 +108,7 @@ input.box ~ button[type=submit] {
 }
 
 input.box:focus {
-   box-shadow: 0 3px 5px rgba(0,0,0,.3);
+   box-shadow: 0 3px 5px var(--accent-bxsh);
 }
 
 input.box ~ button[type=submit]:hover {
@@ -123,7 +125,7 @@ input.box ~ button[type=submit]:hover {
    align-items: center;
    margin-top: 10px;
    font-size: 14px;
-   background: rgba(0,0,0,.7);
+   background: var(--input-details-bg);
    border-radius: 3px;
    color: white;
    filter: opacity(0);
@@ -234,7 +236,7 @@ span.addit.hidden {
    justify-content: center;
    width: 500px;
    height: 50px;
-   background: #ffffff99;
+   background: var(--alert-bg);
    border: 1.5px solid white;
    backdrop-filter: blur(6px);
    border-radius: 5px;
@@ -246,13 +248,13 @@ span.addit.hidden {
 }
 
 .alert.success {
-   background: #2ea44f99;
-   border-color: #2ea44f;
+   background: var(--alert-scs-bg);
+   border-color: var(--alert-scs-txt);
 }
 
 .alert.fail {
-   background: #cb243199;
-   border-color: #cb2431;
+   background: var(--alert-fal-bg);
+   border-color: var(--alert-fal-txt);
 }
 
 .alert.shown {
@@ -269,11 +271,11 @@ span.addit i, .alert i {
 }
 
 span.fail {
-   color: #cb2431;
+   color: var(--alert-fal-txt);
 }
 
 span.success {
-   color: #2ea44f;
+   color: var(--alert-scs-txt);
 }
 
 @keyframes details-appear {

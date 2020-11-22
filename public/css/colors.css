@@ -3,4 +3,25 @@
     --accent-drk: #0aa078;
     --accent-trnp: #10ac8480;
     --accent-extra-trnp: #10ac8433;
+    --accent-bxsh: #0000004d;
+
+    --input-details-bg: #000000b3;
+    --input-open-border: #757575;
+    --input-open-label: #999;
+
+    --alert-scs-bg: #2ea44f99;
+    --alert-fal-bg: #cb243199;
+    --alert-scs-txt: #2ea44f;
+    --alert-fal-txt: #cb2431;
+}
+
+:root:-moz-lwtheme-darktext {
+    --accent-bg: #fafbfc;
+    --alert-bg: #ffffff99;
+}
+
+:root:-moz-lwtheme-brighttext {
+    --accent-bg: #201F1E;
+    --alert-bg: #00000099;
+    color: white;
 }
