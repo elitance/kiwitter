@@ -2,7 +2,7 @@
 
 Kiwitter: Clone of Twitter
 
-## Notice
+## Note
 
 This project has been archived since 18 Feb 2021.
 
