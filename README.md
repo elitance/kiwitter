@@ -4,7 +4,9 @@ Kiwitter: Clone of Twitter
 
 ## Notice
 
-This project has been archived since 18 Feb 2021. New repo for remake of this project is currently private, in initial development stage (I've forgotten everything).
+This project has been archived since 18 Feb 2021.
+
+New repo for remake of this project is currently private, in early development stage (I hardly remember how to code).
 
 ## Overview
 
@@ -22,7 +24,7 @@ Reference at [`package.json`](package.json).
 
 ### Intentions
 
-Just for practice
+Just for practice.
 
 ### License
 
